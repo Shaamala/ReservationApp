@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HomeController {
 	
-	@RequestMapping("/index")
+	@RequestMapping(value= {"/", "index"})
 	public ModelAndView homePage() {
 
 		String message = "<br><div style='text-align:center;'>"
