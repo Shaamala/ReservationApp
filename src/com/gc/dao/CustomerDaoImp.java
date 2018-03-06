@@ -10,6 +10,7 @@ public class CustomerDaoImp implements CustomersDao  {
 	List<Customers> customerList;
 
 	  public List<Customers> readCustomers() {
+		  
 	        Session session = factory.openSession();
 	        Transaction tx = null;
 	        List<Customers> customerList = null;

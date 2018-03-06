@@ -8,9 +8,13 @@ import com.gc.model.Customers;
  */
 
 public interface CustomersDao {
+
 	public List<Customers> getAllCustomers();
-	   public Customers getCustomer(int customerID);
-	   public void updateStudent(Customers customer);
-	   public void deleteStudent(Customers customer);
+
+	public Customers getCustomer(int customerID);
+
+	public void updateStudent(Customers customer);
+
+	public void deleteStudent(Customers customer);
 
 }
