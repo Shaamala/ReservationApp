@@ -22,11 +22,7 @@ bin/
 #hibernate
 hibernate.cfg.xml
 
-public interface APICredentials {
-
-	String CLIENT_ID = "xxxxxxxxxx";
-	String CLIENT_SECRET = "xxxxxxxxxxxxxx";
+APICredentials.java
 	
 	
 
-}
