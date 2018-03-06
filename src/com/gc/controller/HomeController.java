@@ -29,11 +29,19 @@ public class HomeController {
 		return new ModelAndView("pricing", "message", message);
 	}
 	
+	@RequestMapping("/customerProfile")
+	public ModelAndView addCustomer() {
+
+		String message = "<br><div style='text-align:center;'>"
+				+ "<h3>This is the page to add a customer.java</h3>";
+		return new ModelAndView("customerProfile", "message", message);
+	}
+	
 	@RequestMapping("/reserve")
 	public ModelAndView reservation() {
 
 		String message = "<br><div style='text-align:center;'>"
-				+ "<h3>This message is coming from HomeController.java</h3>";
+				+ "<h3>This is the reserve page.java</h3>";
 		return new ModelAndView("reserve", "message", message);
 	}
 	
