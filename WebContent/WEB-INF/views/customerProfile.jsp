@@ -48,13 +48,13 @@ input[type=submit] {
 	<div class="form"">
 		<h3>Make a profile</h3>
 		<form action="" method="post">
-			customerID: <input type="text" name="id"> 
 			First Name: <input type="text" name="fName"> 
 			Last Name: <input type="text" name="lName"> 
 			Street: <input type="text" name="street">
 			City: <input type="text" name="city"> 
 			State: <input type="text" name="state"> 
-			Zip Code: <input type="text" name="zip"> 
+			Zip Code: <input type="text" name="zip">
+			Email: <input type="text" name="email">  
 			Home Phone: <input type="text" name="homeTel"> 
 			Emergency Number: <input type="text" name="emrgTel"> 
 			Veterinarian : <input type="text" name="vetName"> 
