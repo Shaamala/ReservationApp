@@ -1,9 +1,22 @@
 package com.gc.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 /*
  * @Abduljabbar Shaamala
  */
 
+@Entity // marks the class as a hibernate entity (mapped class)
+@Table(name = "customers") // maps the class to the DB table 
 public class Customers {
 	private int customerID;
 	private String fName;
@@ -17,6 +30,7 @@ public class Customers {
 	private String emrgTel;
 	private String vetName;
 	private String vetTel;
+	private Set<Dogs> dogesOwner = new HashSet<Dogs>();
 	
 	public Customers() {
 		
@@ -40,7 +54,9 @@ public class Customers {
 		this.vetTel = vetTel;
 	}
 
-
+	@Id // maps the primary key
+	@GeneratedValue //  generate a value for the field automatically
+	@Column(name = "customerID") //  column names 
 	public int getCustomerID() {
 		return customerID;
 	}
@@ -49,6 +65,7 @@ public class Customers {
 		this.customerID = customerID;
 	}
 
+	@Column
 	public String getfName() {
 		return fName;
 	}
@@ -57,6 +74,7 @@ public class Customers {
 		this.fName = fName;
 	}
 
+	@Column
 	public String getlName() {
 		return lName;
 	}
@@ -65,6 +83,7 @@ public class Customers {
 		this.lName = lName;
 	}
 
+	@Column
 	public String getStreet() {
 		return street;
 	}
@@ -73,6 +92,7 @@ public class Customers {
 		this.street = street;
 	}
 
+	@Column
 	public String getCity() {
 		return city;
 	}
@@ -81,6 +101,7 @@ public class Customers {
 		this.city = city;
 	}
 
+	@Column
 	public String getState() {
 		return state;
 	}
@@ -89,6 +110,7 @@ public class Customers {
 		this.state = state;
 	}
 
+	@Column
 	public String getZip() {
 		return zip;
 	}
@@ -97,6 +119,7 @@ public class Customers {
 		this.zip = zip;
 	}
 
+	@Column
 	public String getEmail() {
 		return email;
 	}
@@ -105,6 +128,7 @@ public class Customers {
 		this.email = email;
 	}
 
+	@Column
 	public String getHomeTel() {
 		return homeTel;
 	}
@@ -113,6 +137,7 @@ public class Customers {
 		this.homeTel = homeTel;
 	}
 
+	@Column
 	public String getEmrgTel() {
 		return emrgTel;
 	}
@@ -121,6 +146,7 @@ public class Customers {
 		this.emrgTel = emrgTel;
 	}
 
+	@Column
 	public String getVetName() {
 		return vetName;
 	}
@@ -129,6 +155,7 @@ public class Customers {
 		this.vetName = vetName;
 	}
 
+	@Column
 	public String getVetTel() {
 		return vetTel;
 	}
@@ -137,6 +164,22 @@ public class Customers {
 		this.vetTel = vetTel;
 	}
 	
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
+	public Set<Dogs> getDogesOwner() {
+		return dogesOwner;
+	}
+
+
+	public void setDogesOwner(Set<Dogs> dogesOwner) {
+		this.dogesOwner = dogesOwner;
+	}
+
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "stock")
+	public Set<StockDailyRecord> getStockDailyRecords() {
+		return this.stockDailyRecords;
+	}
 
 	
 }
