@@ -76,8 +76,15 @@
 			<artifactId>json</artifactId>
 			<version>20140107</version>
 		</dependency>
-		
-			<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<!-- https://mvnrepository.com/artifact/com.mailjet/mailjet-client -->
+		<dependency>
+			<groupId>com.mailjet</groupId>
+			<artifactId>mailjet-client</artifactId>
+			<version>4.1.1</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -106,6 +113,6 @@
 			<groupId>org.hibernate.javax.persistence</groupId>
 			<artifactId>hibernate-jpa-2.1-api</artifactId>
 			<version>1.0.2.Final</version>
-</dependency>
+		</dependency>
 	</dependencies>
 </project>

@@ -176,10 +176,7 @@ public class Customers {
 	}
 
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "stock")
-	public Set<StockDailyRecord> getStockDailyRecords() {
-		return this.stockDailyRecords;
-	}
+
 
 	
 }
