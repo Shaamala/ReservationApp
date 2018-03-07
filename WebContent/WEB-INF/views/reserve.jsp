@@ -46,7 +46,7 @@ input[type=submit] {
 
 	<div class="form">
 		<h3>Reserve your dogs stay</h3>
-		<form action="" method="post">
+		<form action="confirmation" method="post">
 			Name: <input type="text" name="name"> 
 			Breed: <input type="text" name="breed"> 
 			Size: <select name="size">
