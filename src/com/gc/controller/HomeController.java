@@ -17,15 +17,16 @@ public class HomeController {
 	public ModelAndView homePage() {
 
 		String message = "<br><div style='text-align:center;'>"
-				+ "<h3>This is homepage.java</h3>";
+				+ "<h3>Beekel Farms Kennel</h3>";
 		return new ModelAndView("index", "message", message);
 	}
 
 	@RequestMapping("/pricing")
+	
 	public ModelAndView helloWorld() {
 
 		String message = "<br><div style='text-align:center;'>"
-				+ "<h3>This is the pricing page.java</h3>";
+				+ "<h3>Beekel Farms Kennel</h3>";
 		return new ModelAndView("pricing", "message", message);
 	}
 	
@@ -33,7 +34,7 @@ public class HomeController {
 	public ModelAndView addCustomer() {
 
 		String message = "<br><div style='text-align:center;'>"
-				+ "<h3>This is the page to add a customer.java</h3>";
+				+ "<h3>Beekel Farms Kennel</h3>";
 		return new ModelAndView("customerProfile", "message", message);
 	}
 	
@@ -41,9 +42,11 @@ public class HomeController {
 	public ModelAndView reservation() {
 
 		String message = "<br><div style='text-align:center;'>"
-				+ "<h3>This is the reserve page.java</h3>";
+				+ "<h3>Beekel Farms Kennel</h3>";
 		return new ModelAndView("reserve", "message", message);
 	}
+	
+	
 	
 	
 }
