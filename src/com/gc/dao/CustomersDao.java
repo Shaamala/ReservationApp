@@ -12,9 +12,11 @@ public interface CustomersDao {
 	public List<Customers> getAllCustomers();
 
 	public Customers getCustomer(int customerID);
+	
+	public Customers addCustomers(Customers customer);
 
-	public void updateStudent(Customers customer);
+	public void updateCustomres(Customers customer);
 
-	public void deleteStudent(Customers customer);
+	public void deleteCustomers(Customers customer);
 
 }

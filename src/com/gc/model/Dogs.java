@@ -2,11 +2,8 @@ package com.gc.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity // marks the class as a hibernate entity (mapped class)
@@ -17,20 +14,21 @@ public class Dogs {
 	private String breed;
 	private String size;
 	private String food;
-	private String customerID;
+	
+
+	
 	
 	public Dogs() {
 		
 	}
 
-	public Dogs(int dogID, String dogName, String breed, String size, String food, String customerID) {
-		super();
-		this.dogID = dogID;
+	public Dogs(String dogName, String breed, String size, String food) {
+				
 		this.dogName = dogName;
 		this.breed = breed;
 		this.size = size;
 		this.food = food;
-		this.customerID = customerID;
+		
 	}
 
 	@Id // maps the primary key
@@ -81,17 +79,5 @@ public class Dogs {
 	}
 
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "customerID", nullable = false)
-	public String getCustomerID() {
-		return customerID;
-	}
-
-	public void setCustomerID(String customerID) {
-		this.customerID = customerID;
-	}
-	
-	
-	
 
 }
