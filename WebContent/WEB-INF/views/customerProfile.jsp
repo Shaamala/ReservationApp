@@ -47,7 +47,7 @@ input[type=submit] {
 		
 	<div class="form"">
 		<h3>Make a profile</h3>
-		<form action="" method="post">
+		<form action="addCustomer" method="post">
 			First Name: <input type="text" name="fName"> 
 			Last Name: <input type="text" name="lName"> 
 			Street: <input type="text" name="street">
@@ -59,9 +59,13 @@ input[type=submit] {
 			Emergency Number: <input type="text" name="emrgTel"> 
 			Veterinarian : <input type="text" name="vetName"> 
 			Vet Phone Number: <input type="text" name="vetTel"> 
+			Drop-Off Date: <input type="text" name="dropOff"> 
+			Pick-Up Date: <input type="text" name="pickUp"> 
 			<input type="submit" value="Create Profile">
 		</form>
 	</div>
+
 ${message }
+${MSG}
 </body>
 </html>
