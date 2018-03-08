@@ -6,6 +6,7 @@
 <title>Home</title>
 </head>
 <body>
+	<br> ${message}
 	<div style="text-align: center">
 		<h1>
 			Dogcation<br> <br>
@@ -71,6 +72,5 @@
 		dapibus neque laoreet non. Phasellus quis orci vitae neque lacinia
 		blandit.</p>
 
-	<br> ${message}
 </body>
 </html>

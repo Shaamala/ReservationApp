@@ -5,10 +5,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /*
@@ -16,8 +14,9 @@ import javax.persistence.Table;
  */
 
 @Entity // marks the class as a hibernate entity (mapped class)
-@Table(name = "customers") // maps the class to the DB table 
+@Table(name = "Customers") // maps the class to the DB table 
 public class Customers {
+	
 	private int customerID;
 	private String fName;
 	private String lName;
@@ -30,17 +29,18 @@ public class Customers {
 	private String emrgTel;
 	private String vetName;
 	private String vetTel;
-	private Set<Dogs> dogesOwner = new HashSet<Dogs>();
+
 	
+	
+
 	public Customers() {
 		
 	}
 	
-
-	public Customers(int customerID, String fName, String lName, String street, String city, String state, String zip,
+	public Customers(int customerID,String fName, String lName, String street, String city, String state, String zip,
 			String email, String homeTel, String emrgTel, String vetName, String vetTel) {
 		super();
-		this.customerID = customerID;
+	
 		this.fName = fName;
 		this.lName = lName;
 		this.street = street;
@@ -53,6 +53,7 @@ public class Customers {
 		this.vetName = vetName;
 		this.vetTel = vetTel;
 	}
+	
 
 	@Id // maps the primary key
 	@GeneratedValue //  generate a value for the field automatically
@@ -163,20 +164,5 @@ public class Customers {
 	public void setVetTel(String vetTel) {
 		this.vetTel = vetTel;
 	}
-	
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
-	public Set<Dogs> getDogesOwner() {
-		return dogesOwner;
-	}
 
-
-	public void setDogesOwner(Set<Dogs> dogesOwner) {
-		this.dogesOwner = dogesOwner;
-	}
-
-
-
-
-	
 }

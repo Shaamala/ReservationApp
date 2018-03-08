@@ -1,6 +1,8 @@
 package com.gc.dao;
 
 import java.util.List;
+
+import com.gc.model.Customers;
 import com.gc.model.Dogs;
 
 /*
@@ -9,11 +11,13 @@ import com.gc.model.Dogs;
 
 public interface DogsDao {
 
-	public List<Dogs> getAllCustomers();
+	public List<Dogs> getAllDogs();
 
 	public Dogs getDogs(int dogsID);
+	
+	public Dogs addDogs(Dogs dog);
 
-	public void updateStudent(Dogs dog);
+	public void updateDogs(Dogs dog);
 
-	public void deleteStudent(Dogs dog);
+	public void deleteDogs(Dogs dog);
 }
