@@ -38,8 +38,8 @@ public class HomeController {
 		return new ModelAndView("index", "message", message);
 	}
 
-	@RequestMapping("/confirmation")
-	public ModelAndView sendEmail2(@RequestParam("email")String email) {
+	@RequestMapping("/sendEmail")
+	public ModelAndView sendEmail(@RequestParam("email") String email, @RequestParam("fName") String fName) {
 
 		MailjetRequest email1;
 		MailjetResponse response = null;
@@ -57,9 +57,9 @@ public class HomeController {
 				new JSONObject().put(Emailv31.Message.EMAIL, "malarbw@umich.edu").put(Emailv31.Message.NAME,
 						"Administrator"))
 				.put(Emailv31.Message.SUBJECT, "RESERVATION CONFRIMATION")
-				.put(Emailv31.Message.TEXTPART, "Dear customer, thanks for reserving with our kennel.")
-				.put(Emailv31.Message.HTMLPART,
-						"<h3>Dear passenger, welcome to Mailjet</h3><br/>May the delivery force be with you!")
+				.put(Emailv31.Message.TEXTPART, "Dear " + fName + ", thanks for reserving with our kennel.")
+				//.put(Emailv31.Message.HTMLPART,
+					//	"<h3>Dear passenger, welcome to Mailjet</h3><br/>May the delivery force be with you!")
 				.put(Emailv31.Message.TO, new JSONArray()
 						.put(new JSONObject().put(Emailv31.Message.EMAIL, email)));
 
@@ -72,7 +72,7 @@ public class HomeController {
 			e.printStackTrace();
 		}
 
-		return new ModelAndView("confirmation", "response", response.getStatus());
+		return new ModelAndView("sendEmail", "response", response.getStatus());
 	}
 
 	
@@ -109,7 +109,7 @@ public class HomeController {
 
 	
 	// Add dog 
-		@RequestMapping(value="adddog")
+		/*@RequestMapping(value="adddog")
 		public ModelAndView adddog(@RequestParam("dogName")String dogName, @RequestParam("breed")String breed,@RequestParam("size")String size,
 				@RequestParam("food")String food) {
 			
@@ -125,11 +125,11 @@ public class HomeController {
 			String msg = "Add customer successful";
 			
 			return new ModelAndView("index","MSG",msg);
-		}
+		}*/
 	
 
 		@RequestMapping(value="addCustomer")
-		public ModelAndView addCustomersandReservation(@RequestParam("fName")String fName,@RequestParam("lName")String lName,@RequestParam("street")String street,
+		public ModelAndView addCustomer(@RequestParam("fName")String fName,@RequestParam("lName")String lName,@RequestParam("street")String street,
 				@RequestParam("city")String city,@RequestParam("state")String state,@RequestParam("zip")String zip,@RequestParam("email")String email,@RequestParam("homeTel")String homeTel,
 				@RequestParam("emrgTel")String emrgTel,@RequestParam("vetName")String vetName, @RequestParam("vetTel")String vetTel,
 				@RequestParam("dropOff")String dropOff,@RequestParam("pickUp")String pickUp) {
@@ -159,7 +159,8 @@ public class HomeController {
 			test1.addReservation(reserv);
 			
 				
-				String msg = "Reservation successful";
+				String msg = "Profile created.";
+				
 				
 				return new ModelAndView("index","MSG",msg);
 				

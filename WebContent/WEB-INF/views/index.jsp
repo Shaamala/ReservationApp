@@ -71,6 +71,6 @@
 		Maecenas fringilla faucibus commodo. Cras bibendum eros nisl, in
 		dapibus neque laoreet non. Phasellus quis orci vitae neque lacinia
 		blandit.</p>
-
+${MSG }
 </body>
 </html>

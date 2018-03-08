@@ -47,12 +47,15 @@ input[type=submit] {
 
 	<div class="form"">
 		<h3>Reserve your dogs stay</h3>
-		<form action=adddog" method="post">
-			Name: <input type="text" name="dogName"> 
+		<form action=sendEmail method="post">
+			Your Name: <input type="text" name="fName">
+			Email: <input type="text" name="email">
+			Dog Name: <input type="text" name="dogName"> 
 			Breed: <input type="text" name="breed"> 
 			Size: <input type="text" name="size"> Food: <input type="text" name="food">
-				<input type="submit" value="Reserve">
-		</form>
+			<input type="submit" value="Reserve">
+			</form>
+			
 	</div>
 
 
