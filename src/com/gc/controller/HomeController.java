@@ -1,25 +1,25 @@
 package com.gc.controller;
 
-import java.util.HashSet;
-import java.util.Set;
-
-<<<<<<< HEAD
 import org.json.JSONArray;
 import org.json.JSONObject;
-=======
->>>>>>> 891f05afe6063ff765d7abeaa56d9eeedaf58843
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gc.dao.CustomerDaoImp;
-import com.gc.dao.CustomersDao;
 import com.gc.dao.DogsDaoImp;
 import com.gc.dao.ReservationDoaImp;
 import com.gc.model.Customers;
 import com.gc.model.Dogs;
 import com.gc.model.Reservation;
+import com.mailjet.client.ClientOptions;
+import com.mailjet.client.MailjetClient;
+import com.mailjet.client.MailjetRequest;
+import com.mailjet.client.MailjetResponse;
+import com.mailjet.client.errors.MailjetException;
+import com.mailjet.client.errors.MailjetSocketTimeoutException;
+import com.mailjet.client.resource.Emailv31;
 
 /**
  * 
@@ -33,15 +33,15 @@ public class HomeController {
 	@RequestMapping(value = { "/", "index" })
 	public ModelAndView homePage() {
 
-<<<<<<< HEAD
+
 		String message = "<br><div style='text-align:center;'>" + "<h3>Beekel Farms Kennel</h3>";
 		return new ModelAndView("index", "message", message);
 	}
 
 	@RequestMapping("/confirmation")
-	public ModelAndView sendEmail2() {
+	public ModelAndView sendEmail2(@RequestParam("email")String email) {
 
-		MailjetRequest email;
+		MailjetRequest email1;
 		MailjetResponse response = null;
 
 		// Note how we set the version to v3.1 using ClientOptions
@@ -61,12 +61,12 @@ public class HomeController {
 				.put(Emailv31.Message.HTMLPART,
 						"<h3>Dear passenger, welcome to Mailjet</h3><br/>May the delivery force be with you!")
 				.put(Emailv31.Message.TO, new JSONArray()
-						.put(new JSONObject().put(Emailv31.Message.EMAIL, "ashaamala@hawkmail.hfcc.edu")));
+						.put(new JSONObject().put(Emailv31.Message.EMAIL, email)));
 
-		email = new MailjetRequest(Emailv31.resource).property(Emailv31.MESSAGES, (new JSONArray()).put(message));
+		email1 = new MailjetRequest(Emailv31.resource).property(Emailv31.MESSAGES, (new JSONArray()).put(message));
 
 		try {
-			response = client.post(email);
+			response = client.post(email1);
 		} catch (MailjetException | MailjetSocketTimeoutException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -75,82 +75,42 @@ public class HomeController {
 		return new ModelAndView("confirmation", "response", response.getStatus());
 	}
 
-	/* @RequestMapping("/confirmation") */
-	public ModelAndView sendEmail() throws MailjetException, MailjetSocketTimeoutException {
-		MailjetClient client = new MailjetClient(System.getenv("737eb42ade92225b46e471d3d091fa80"),
-				System.getenv("3ffa02400a98cb6aeaf190ede5f50b5e"));
-		MailjetRequest email;
-		JSONArray recipients;
-		MailjetResponse response;
-
-		System.out.print("hello");
-
-		recipients = new JSONArray().put(new JSONObject().put(Contact.EMAIL, "malarbw@umich.edu"));
-
-		System.out.println(recipients);
-
-		email = new MailjetRequest(Email.resource).property(Email.FROMNAME, "Administrator")
-				.property(Email.FROMEMAIL, "ashaamala@hawkmail.hfcc.edu").property(Email.SUBJECT, "Thank you!")
-				.property(Email.TEXTPART, "Thank you for choosing to stay at our kennel.")
-				.property(Email.RECIPIENTS, recipients).property(Email.MJCUSTOMID, "JAVA-Email");
-
-		response = client.post(email);
-
-		return new ModelAndView("confirmation", "response", response);
-
-	}
-
-	@RequestMapping("/pricing")
-
-	public ModelAndView helloWorld() {
-
-		String message = "<br><div style='text-align:center;'>" + "<h3>Beekel Farms Kennel</h3>";
-=======
-		String message = "<br><div style='text-align:center;'>"
-				+ "<h3>This is homepage.java</h3>";
-		return new ModelAndView("index", "message", message);
-	}
+	
 
 	@RequestMapping("/pricing")
 	public ModelAndView helloWorld() {
 
 		String message = "<br><div style='text-align:center;'>"
 				+ "<h3>This is the pricing page.java</h3>";
->>>>>>> 891f05afe6063ff765d7abeaa56d9eeedaf58843
+
 		return new ModelAndView("pricing", "message", message);
 	}
 
 	@RequestMapping("/customerProfile")
 	public ModelAndView addCustomer() {
 
-<<<<<<< HEAD
+
 		String message = "<br><div style='text-align:center;'>" + "<h3>Beekel Farms Kennel</h3>";
-=======
-		String message = "<br><div style='text-align:center;'>"
-				+ "<h3>This is the page to add a customer.java</h3>";
->>>>>>> 891f05afe6063ff765d7abeaa56d9eeedaf58843
+
+		
+
 		return new ModelAndView("customerProfile", "message", message);
 	}
 
 	@RequestMapping("/reserve")
 	public ModelAndView reservation() {
 
-<<<<<<< HEAD
+
 		String message = "<br><div style='text-align:center;'>" + "<h3>Beekel Farms Kennel</h3>";
 		return new ModelAndView("reserve", "message", message);
 	}
 
-=======
-		String message = "<br><div style='text-align:center;'>"
-				+ "<h3>This is the reserve page.java</h3>";
-		return new ModelAndView("reserve", "message", message);
-	}
 	
 
 	
 	// Add dog 
 		@RequestMapping(value="adddog")
-		public ModelAndView adddog(@RequestParam("dogName")String dogName,@RequestParam("breed")String breed,@RequestParam("size")String size,
+		public ModelAndView adddog(@RequestParam("dogName")String dogName, @RequestParam("breed")String breed,@RequestParam("size")String size,
 				@RequestParam("food")String food) {
 			
 				Dogs dog = new Dogs();
@@ -171,7 +131,7 @@ public class HomeController {
 		@RequestMapping(value="addCustomer")
 		public ModelAndView addCustomersandReservation(@RequestParam("fName")String fName,@RequestParam("lName")String lName,@RequestParam("street")String street,
 				@RequestParam("city")String city,@RequestParam("state")String state,@RequestParam("zip")String zip,@RequestParam("email")String email,@RequestParam("homeTel")String homeTel,
-				@RequestParam("emrgTel")String emrgTel,@RequestParam("vetName")String vetName,@RequestParam("vetTel")String vetTel,
+				@RequestParam("emrgTel")String emrgTel,@RequestParam("vetName")String vetName, @RequestParam("vetTel")String vetTel,
 				@RequestParam("dropOff")String dropOff,@RequestParam("pickUp")String pickUp) {
 			
 			
@@ -205,7 +165,6 @@ public class HomeController {
 				
 		}		
 		
-	
-	
->>>>>>> 891f05afe6063ff765d7abeaa56d9eeedaf58843
+
 }
+
