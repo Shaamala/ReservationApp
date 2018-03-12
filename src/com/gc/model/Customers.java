@@ -29,18 +29,22 @@ public class Customers {
 	private String emrgTel;
 	private String vetName;
 	private String vetTel;
-
-	
-	
+	private String dropOff;
+	private String pickUp;
+	private String dog;	
 
 	public Customers() {
 		
 	}
 	
-	public Customers(int customerID,String fName, String lName, String street, String city, String state, String zip,
-			String email, String homeTel, String emrgTel, String vetName, String vetTel) {
-		super();
+
 	
+
+	public Customers(String fName, String lName, String street, String city, String state, String zip, String email,
+			String homeTel, String emrgTel, String vetName, String vetTel, String dropOff, String pickUp,
+			String dog) {
+
+		super();
 		this.fName = fName;
 		this.lName = lName;
 		this.street = street;
@@ -52,8 +56,11 @@ public class Customers {
 		this.emrgTel = emrgTel;
 		this.vetName = vetName;
 		this.vetTel = vetTel;
+		this.dropOff = dropOff;
+		this.pickUp = pickUp;
+		this.dog = dog;
+
 	}
-	
 
 	@Id // maps the primary key
 	@GeneratedValue //  generate a value for the field automatically
@@ -164,5 +171,30 @@ public class Customers {
 	public void setVetTel(String vetTel) {
 		this.vetTel = vetTel;
 	}
+	@Column
+	public String getDropOff() {
+		return dropOff;
+	}
+
+	public void setDropOff(String dropOff) {
+		this.dropOff = dropOff;
+	}
+	@Column
+	public String getPickUp() {
+		return pickUp;
+	}
+
+	public void setPickUp(String pickUp) {
+		this.pickUp = pickUp;
+	}
+	@Column
+	public String getDog() {
+		return dog;
+	}
+
+	public void setDog(String dog) {
+		this.dog = dog;
+	}
+
 
 }

@@ -14,6 +14,7 @@ public class Dogs {
 	private String breed;
 	private String size;
 	private String food;
+	private String owner;
 	
 
 	
@@ -22,12 +23,13 @@ public class Dogs {
 		
 	}
 
-	public Dogs(String dogName, String breed, String size, String food) {
+	public Dogs(String dogName, String breed, String size, String food,String owner) {
 				
 		this.dogName = dogName;
 		this.breed = breed;
 		this.size = size;
 		this.food = food;
+		this.owner = owner;
 		
 	}
 
@@ -77,7 +79,18 @@ public class Dogs {
 	public void setFood(String food) {
 		this.food = food;
 	}
+	
+	@Column
+	public String getOwner() {
+		return owner;
+	}
 
+	public void setOwner(String owner) {
+		this.owner = owner;
+	}
+
+
+	
 
 
 }
