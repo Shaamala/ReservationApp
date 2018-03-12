@@ -8,6 +8,13 @@
 </head>
 <body>
 <h1>SUCCESS</h1>
+<div style="text-align: center">
+		
+		<h3>
+			<a href="index.html">Home</a> <a href="pricing.html">Pricing</a> <a
+				href="customerProfile.html">Make Profile</a> <a href="reserve.html">Reserve</a>
+		</h3>
+	</div>
 ${response }
 
 
