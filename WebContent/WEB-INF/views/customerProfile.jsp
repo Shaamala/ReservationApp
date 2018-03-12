@@ -47,7 +47,8 @@ input[type=submit] {
 		
 	<div class="form"">
 		<h3>Create profile and make reservation</h3>
-		<form action="addCustomer" method="post">
+		<form action="addProfile" method="post">
+		<h3>Customer Information:</h3><br>
 			First Name: <input type="text" name="fName"> 
 			Last Name: <input type="text" name="lName"> 
 			Street: <input type="text" name="street">
@@ -58,14 +59,27 @@ input[type=submit] {
 			Home Phone: <input type="text" name="homeTel"> 
 			Emergency Number: <input type="text" name="emrgTel"> 
 			Veterinarian : <input type="text" name="vetName"> 
-			Vet Phone Number: <input type="text" name="vetTel"> 
+			Vet Phone Number: <input type="text" name="vetTel"> <br>
+			
+		<h3>Dog Information:</h3><br>
+		
+			Dog Name: <input type="text" name="dogName"> 
+			Breed: <input type="text" name="breed"> 
+			Size: <input type="text" name="size"> Food: <input type="text" name="food"><br>
+			
+			
+		<h3>Date:</h3><br>
+		
 			Drop-Off Date: <input type="text" name="dropOff"> 
-			Pick-Up Date: <input type="text" name="pickUp"> 
-			<input type="submit" value="Make Profile">
-		</form>
+			Pick-Up Date: <input type="text" name="pickUp"> <br>
+	
+		<input type="submit" value="Reserve">
+			</form>
+			
 	</div>
 
-${message }
+${message}
 ${MSG}
+
 </body>
 </html>

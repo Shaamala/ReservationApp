@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -43,21 +44,6 @@ input[type=submit] {
 			<a href="reserve.html">Reserve</a>
 		</h3>
 	</div>
-
-
-	<div class="form"">
-		<h3>Reserve your dogs stay</h3>
-		<form action=sendEmail method="post">
-			Your Name: <input type="text" name="fName">
-			Email: <input type="text" name="email">
-			Dog Name: <input type="text" name="dogName"> 
-			Breed: <input type="text" name="breed"> 
-			Size: <input type="text" name="size"> Food: <input type="text" name="food">
-			<input type="submit" value="Reserve">
-			</form>
-			
-	</div>
-
 
 
 </body>
