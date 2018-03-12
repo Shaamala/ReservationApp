@@ -32,6 +32,7 @@ public class CustomerDaoImp implements CustomersDao {
 		List<Customers> list = new ArrayList<Customers>();
 		try {
 			tx = session.beginTransaction();
+
 			
 			customerList =  session.createQuery("Select c.customerID,c.fName,c.lName FROM Customers c").list();
 						
@@ -40,6 +41,9 @@ public class CustomerDaoImp implements CustomersDao {
 					   list.add((Customers) customer);
 				   }}
 			
+
+			customerList = (List<Customers>)session.createQuery("FROM Customers").setMaxResults(10).list();
+
 			tx.commit(); // COMMIT MUST COME AFTER THE ACTION
 		} catch (HibernateException e) {
 			if (tx != null)

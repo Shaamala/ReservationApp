@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
+
 import org.hibernate.HibernateException;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -21,6 +23,9 @@ import com.gc.dao.CustomerDaoImp;
 import com.gc.dao.DogsDaoImp;
 import com.gc.model.Customers;
 import com.gc.model.Dogs;
+
+
+
 import com.gc.util.HibernateUtil;
 import com.mailjet.client.ClientOptions;
 import com.mailjet.client.MailjetClient;
@@ -106,9 +111,10 @@ public class HomeController {
 		return new ModelAndView("reserve", "message", message);
 	}
 
+
 	// Create Customer profile
 	@RequestMapping(value = "addProfile")
-	public ModelAndView addProfile(@RequestParam("fName") String fName, @RequestParam("lName") String lName,
+	public ModelAndView addCustomer(@RequestParam("fName") String fName, @RequestParam("lName") String lName,
 			@RequestParam("street") String street, @RequestParam("city") String city,
 			@RequestParam("state") String state, @RequestParam("zip") String zip, @RequestParam("email") String email,
 			@RequestParam("homeTel") String homeTel, @RequestParam("emrgTel") String emrgTel,
@@ -116,6 +122,7 @@ public class HomeController {
 			@RequestParam("dropOff") String dropOff, @RequestParam("pickUp") String pickUp,
 			@RequestParam("dogName") String dogName, @RequestParam("breed") String breed,
 			@RequestParam("size") String size, @RequestParam("food") String food) {
+
 		// add customer to database
 		Customers customer = new Customers();
 		customer.setfName(fName);
@@ -129,10 +136,14 @@ public class HomeController {
 		customer.setEmrgTel(emrgTel);
 		customer.setVetName(vetName);
 		customer.setVetTel(vetTel);
-		customer.setDog(dogName);
+		customer.setDogName(dogName);
 		customer.setDropOff(dropOff);
 		customer.setPickUp(pickUp);
-		// add doge to database
+		customer.setDogName(dogName);
+		customer.setDropOff(dropOff);
+		customer.setPickUp(pickUp);
+
+		// add dog to database
 		Dogs dog = new Dogs();
 		dog.setDogName(dogName);
 		dog.setBreed(breed);
@@ -181,7 +192,7 @@ public class HomeController {
 			@RequestParam("homeTel") String homeTel, @RequestParam("emrgTel") String emrgTel,
 			@RequestParam("vetName") String vetName, @RequestParam("vetTel") String vetTel,
 			@RequestParam("dropOff") String dropOff, @RequestParam("pickUp") String pickUp,
-			@RequestParam("dog") String dogName) {
+			@RequestParam("dogName") String dogName) {
 
 		Customers customer = new Customers();
 		customer.setfName(fName);
@@ -195,7 +206,7 @@ public class HomeController {
 		customer.setEmrgTel(emrgTel);
 		customer.setVetName(vetName);
 		customer.setVetTel(vetTel);
-		customer.setDog(dogName);
+		customer.setDogName(dogName);
 		customer.setDropOff(dropOff);
 		customer.setPickUp(pickUp);
 
@@ -246,7 +257,7 @@ public class HomeController {
 		customer.setEmrgTel(emrgTel);
 		customer.setVetName(vetName);
 		customer.setVetTel(vetTel);
-		customer.setDog(dogName);
+		customer.setDogName(dogName);
 		customer.setDropOff(dropOff);
 		customer.setPickUp(pickUp);
 
@@ -348,4 +359,5 @@ public class HomeController {
 
 		return new ModelAndView("reservlist", "RList", reserveList);
 	}
+
 }

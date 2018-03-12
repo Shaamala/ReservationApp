@@ -31,10 +31,7 @@ public class Customers {
 	private String vetTel;
 	private String dropOff;
 	private String pickUp;
-	private String dog;
-
-	
-	
+	private String dog;	
 
 	public Customers() {
 		
@@ -46,6 +43,7 @@ public class Customers {
 	public Customers(String fName, String lName, String street, String city, String state, String zip, String email,
 			String homeTel, String emrgTel, String vetName, String vetTel, String dropOff, String pickUp,
 			String dog) {
+
 		super();
 		this.fName = fName;
 		this.lName = lName;
@@ -61,10 +59,8 @@ public class Customers {
 		this.dropOff = dropOff;
 		this.pickUp = pickUp;
 		this.dog = dog;
+
 	}
-
-
-
 
 	@Id // maps the primary key
 	@GeneratedValue //  generate a value for the field automatically
@@ -199,8 +195,6 @@ public class Customers {
 	public void setDog(String dog) {
 		this.dog = dog;
 	}
-	
 
-	
 
 }

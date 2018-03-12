@@ -17,6 +17,9 @@
 				<a href="customerList.html">listCustomers</a>
 				<a href="dogList.html">listdog</a>
 				<a href="resevlist.html">Reservation</a>
+
+				<a href="reservationList.html">listReservation</a>
+
 		</h3>
 	</div>
 
