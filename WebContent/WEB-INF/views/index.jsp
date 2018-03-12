@@ -14,6 +14,8 @@
 		<h3>
 			<a href="index.html">Home</a> <a href="pricing.html">Pricing</a> <a
 				href="customerProfile.html">Make Profile</a> <a href="reserve.html">Reserve</a>
+				<a href="customerList.html">listCustomers</a>
+				<a href="reservationList.html">listReservation</a>
 		</h3>
 	</div>
 

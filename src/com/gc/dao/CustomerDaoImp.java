@@ -27,7 +27,7 @@ public class CustomerDaoImp implements CustomersDao {
 		List<Customers> customerList = null;
 		try {
 			tx = session.beginTransaction();
-			customerList = session.createQuery("FROM customers").list();
+			customerList = (List<Customers>)session.createQuery("FROM Customers").setMaxResults(10).list();
 			tx.commit(); // COMMIT MUST COME AFTER THE ACTION
 		} catch (HibernateException e) {
 			if (tx != null)

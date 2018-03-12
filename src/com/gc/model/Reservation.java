@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -22,16 +23,45 @@ import javax.persistence.Table;
 public class Reservation {
 
 	private int reservationID;
-	private int customerID;
+//	@Column
+//	private int customerID;
+////	@Column
+//	private int dogID;
+//	public int getDogID() {
+//		return dogID;
+//	}
+//
+//	public void setDogID(int dogID) {
+//		this.dogID = dogID;
+//	}
+//
+//
+//
+//	public int getCustomerID() {
+//		return customerID;
+//	}
+//
+//	public void setCustomerID(int customerID) {
+//		this.customerID = customerID;
+//	}
 	private String dropOff;
 	private String pickUp;
 
-
 	private Customers customer;
 	
+	private Dogs dog;
 
-	
-	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+//	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+//	@JoinColumn(name="dogID")
+//	public Dogs getDog() {
+//		return dog;
+//	}
+
+	public void setDog(Dogs dog) {
+		this.dog = dog;
+	}
+
+	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinColumn(name="customerID")
 	public Customers getCustomer() {
 		return customer;
@@ -54,7 +84,6 @@ public class Reservation {
 
 	@Id // maps the primary key
 	@GeneratedValue // generate a value for the field automatically
-	
 	public int getReservationID() {
 		return reservationID;
 	}

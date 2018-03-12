@@ -3,6 +3,7 @@
  */
 package com.gc.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -10,6 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import com.gc.model.Customers;
 import com.gc.model.Reservation;
 import com.gc.util.HibernateUtil;
 
@@ -25,11 +27,15 @@ public  class ReservationDoaImp implements ReservationDoa{
 			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
 			Session session = sessionFactory.openSession();
+			//Customers customer = (Customers) session.load(Customers.class, customerID);
 			Transaction tx = null;
-			List<Reservation> reservationList = null;
+			ArrayList<Reservation> reservationList = null;
 			try {
 				tx = session.beginTransaction();
-				reservationList = session.createQuery("FROM customers").list();
+				reservationList = (ArrayList<Reservation>)session.createQuery
+						("SELECT res FROM Reservation res  join res.Customers").list();
+				
+				System.out.println(reservationList.size());
 				tx.commit(); // COMMIT MUST COME AFTER THE ACTION
 			} catch (HibernateException e) {
 				if (tx != null)
