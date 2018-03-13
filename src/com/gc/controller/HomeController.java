@@ -1,12 +1,9 @@
 package com.gc.controller;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.hibernate.Criteria;
-
 import org.hibernate.HibernateException;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -23,9 +20,6 @@ import com.gc.dao.CustomerDaoImp;
 import com.gc.dao.DogsDaoImp;
 import com.gc.model.Customers;
 import com.gc.model.Dogs;
-
-
-
 import com.gc.util.HibernateUtil;
 import com.mailjet.client.ClientOptions;
 import com.mailjet.client.MailjetClient;
@@ -34,6 +28,7 @@ import com.mailjet.client.MailjetResponse;
 import com.mailjet.client.errors.MailjetException;
 import com.mailjet.client.errors.MailjetSocketTimeoutException;
 import com.mailjet.client.resource.Emailv31;
+import com.mailjet.client.resource.Messagestatistics;
 
 /**
  * 
@@ -86,6 +81,24 @@ public class HomeController {
 		}
 
 		return new ModelAndView("sendEmail", "response", response.getStatus());
+	}
+	
+	@RequestMapping("")
+	public ModelAndView emailStats() {
+		  MailjetClient client;
+	      MailjetRequest request;
+	      MailjetResponse response = null;
+	      client = new MailjetClient(System.getProperty("PublicKey"), System.getProperty("PrivateKey"));
+	      request = new MailjetRequest(Messagestatistics.resource);
+	      try {
+			response = client.get(request);
+		} catch (MailjetException | MailjetSocketTimeoutException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	      System.out.println(response.getStatus());
+	      System.out.println(response.getData());
+		return new ModelAndView ("","","");
 	}
 
 	@RequestMapping("/pricing")
