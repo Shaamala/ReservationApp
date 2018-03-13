@@ -9,13 +9,21 @@
 </head>
 <body>
 
+<div style="text-align: center">
+				<a href="index.html">Home</a>
+				<a href="customerList.html">Customers</a>
+				<a href="dogList.html">Dogs</a>
+				<a href="reservationList.html">listReservation</a>
+
+</div>
+<br>
 <br>
 <form action="searchbyreserve">
 <input type="text" name="dropOff">
 <input type="submit" value="Search By date">
 </form>
 
-
+<br>
 <table border="1" >
 			<tr>
 					<th>First Name

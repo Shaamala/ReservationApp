@@ -8,11 +8,20 @@
 <title>Dogs List</title>
 </head>
 <body>
-<!-- This is a test -->
+
+<div style="text-align: center">
+				<a href="index.html">Home</a>
+				<a href="customerList.html">Customers</a>
+				<a href="dogList.html">Dogs</a>
+				<a href="reservationList.html">listReservation</a>
+</div>
+<br>
+<br>
+
 <form action="searchbydog">
 <input type="text" name="dogName">
 <input type="submit" value="Search By dog">
-</form>
+</form> <br>
 ${deletedog}
 <table border="1" >
 
@@ -41,7 +50,8 @@ ${deletedog}
 		</c:forEach>
 </table>
 
-${addDog}
+${addDog}<br>
+
 <h3>Add dog</h3> 
 <form action="adddog" method="post">
 Dog Name: <input type="text" name="dogName" required>
