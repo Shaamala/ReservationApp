@@ -1,5 +1,7 @@
 package com.gc.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity // marks the class as a hibernate entity (mapped class)
 @Table(name = "dogs") // maps the class to the DB table 
-public class Dogs {
+public class Dogs implements Serializable{
 	private int dogID;
 	private String dogName;
 	private String breed;

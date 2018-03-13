@@ -149,10 +149,9 @@ public class HomeController {
 		customer.setEmrgTel(emrgTel);
 		customer.setVetName(vetName);
 		customer.setVetTel(vetTel);
-		customer.setDogName(dogName);
+		customer.setDog(dogName);
 		customer.setDropOff(dropOff);
 		customer.setPickUp(pickUp);
-		customer.setDogName(dogName);
 		customer.setDropOff(dropOff);
 		customer.setPickUp(pickUp);
 
@@ -219,7 +218,7 @@ public class HomeController {
 		customer.setEmrgTel(emrgTel);
 		customer.setVetName(vetName);
 		customer.setVetTel(vetTel);
-		customer.setDogName(dogName);
+		customer.setDog(dogName);
 		customer.setDropOff(dropOff);
 		customer.setPickUp(pickUp);
 
@@ -270,7 +269,7 @@ public class HomeController {
 		customer.setEmrgTel(emrgTel);
 		customer.setVetName(vetName);
 		customer.setVetTel(vetTel);
-		customer.setDogName(dogName);
+		customer.setDog(dogName);
 		customer.setDropOff(dropOff);
 		customer.setPickUp(pickUp);
 
@@ -318,6 +317,16 @@ public class HomeController {
 		return new ModelAndView("dogList", "addDog", msg);
 
 	}
+	// delete dog
+		@RequestMapping("deletedog")
+		public ModelAndView deleteDog(@RequestParam("id") int dogID) {
+
+			System.out.println(dogID);
+			DogsDaoImp testD = new DogsDaoImp();
+			testD.deleteDogs(dogID);
+			ArrayList<Dogs> dogList = listAllDogs();
+			return new ModelAndView("dogList", "dList", dogList);
+		}
 	// search in customer list by drop off date
 	@RequestMapping("searchbydate")
 	public ModelAndView searchreserve(@RequestParam("dropOff") String date) {

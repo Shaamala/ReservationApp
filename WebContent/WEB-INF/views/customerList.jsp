@@ -23,6 +23,25 @@
 
 <table border="1" >
 
+				<tr>
+					<th> ID
+					<th>First Name
+					<th>Last Name
+					<th>Dog Name
+					<th>Drop off Date
+					<th>Pick up Date
+					<th>Street
+					<th>city
+					<th>State
+					<th>ZipCode
+					<th>Emial
+					<th>Home Phone
+					<th>Emergency Number
+					<th>Veterinarian
+					<th>Vet Phone
+					<th>Action
+					
+				</tr>
 			<c:forEach var="customers" items="${cList}">
 
 			<tr>
@@ -40,10 +59,12 @@
 				<td><c:out value="${customers.email}"></c:out></td>
 				<td><c:out value="${customers.homeTel}"></c:out></td>
 				<td><c:out value="${customers.emrgTel}"></c:out></td>
+				<td><c:out value="${customers.vetName}"></c:out></td>
+				<td><c:out value="${customers.vetTel}"></c:out></td>
 
 				<td>
-				<c:url var="deleteUrl" value="/delete" />
-					<a href="delete?id=${customer.customerID}">Delete</a></td>	
+				
+					<a href="delete?id=${customers.customerID}">Delete</a></td>	
 
 			</tr>
 

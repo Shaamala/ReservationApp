@@ -1,7 +1,6 @@
 package com.gc.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +14,7 @@ import javax.persistence.Table;
 
 @Entity // marks the class as a hibernate entity (mapped class)
 @Table(name = "Customers") // maps the class to the DB table 
-public class Customers {
+public class Customers implements Serializable{
 	
 	private int customerID;
 	private String fName;
