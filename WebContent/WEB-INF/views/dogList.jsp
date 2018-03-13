@@ -13,29 +13,35 @@
 <input type="text" name="dogName">
 <input type="submit" value="Search By dog">
 </form>
-
+${deletedog}
 <table border="1" >
 
-			<c:forEach var="dogs" items="${dList}">
-
 			<tr>
-	
+				<th>ID</th>
+				<th>Name</th>
+				<th>Breed</th>
+				<th>Size</th>
+				<th>Food</th>
+				<th>Owner</th>
+				<th>Action</th>
+			</tr>
+			<c:forEach var="dogs" items="${dList}">
+			
+			<tr>
 				<td><c:out value="${dogs.dogID}"></c:out></td>
 				<td><c:out value="${dogs.dogName}"></c:out></td>
 				<td><c:out value="${dogs.breed}"></c:out></td>
 				<td><c:out value="${dogs.size}"></c:out></td>
 				<td><c:out value="${dogs.food}"></c:out></td>
-				<td><c:out value="${dogs.owner}"></c:out></td>
-				
-				<td>
-				<c:url var="deleteUrl" value="/delete" />
-					<a href="${deleteUrl}?id=${dogs.dogID}">Delete</a></td>	
+				<td><c:out value="${dogs.owner}"></c:out></td>			
+				<td>				
+					<a href="deletedog?id=${dogs.dogID}">Delete</a></td>
 			</tr>
 
 		</c:forEach>
 </table>
 
-${adddog}
+${addDog}
 <h3>Add dog</h3> 
 <form action="adddog" method="post">
 Dog Name: <input type="text" name="dogName" required>

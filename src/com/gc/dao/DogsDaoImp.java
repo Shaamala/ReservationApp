@@ -3,6 +3,7 @@ package com.gc.dao;
 import java.util.List;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -89,11 +90,19 @@ public  class DogsDaoImp implements DogsDao{
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
 		Transaction tx = null;
-
-		Dogs dog = getDogs(dogID);
+		List<Dogs> dogList = null;
+		
 		try {
+			
 			tx = session.beginTransaction();
-			session.delete(dog);
+			Query query1 = session.createQuery("SELECT d FROM Dogs d WHERE d.id = :id");
+			System.out.println("Testing for Antonella");
+	        query1.setParameter("id", dogID);
+	        System.out.println("bbbbb" + dogID);
+	        dogList = query1.list();
+	        session.delete(dogList.get(0));
+	        System.out.println("To delete: " + dogList.get(0));
+	        
 			tx.commit();
 		} catch (HibernateException e) {
 			if (tx != null)

@@ -60,9 +60,7 @@ public class CustomerDaoImp implements CustomersDao {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
 		Transaction tx = null;
-		
-		//Customers customer = new Customers();
-		//customer.setCustomerID(customerID);
+
 		try {
 			tx = session.beginTransaction();
 			session.save(customer);
@@ -112,11 +110,12 @@ public class CustomerDaoImp implements CustomersDao {
 		
 		try {
 			tx = session.beginTransaction();
-			Query query = session.createQuery("SELECT * FROM user_table WHERE id = :id");
+			Query query = session.createQuery("SELECT c FROM Customers c WHERE c.id = :id");
 	        query.setParameter("id", customerID);
 	        System.out.println("aaaaa" + customerID);
 	        customerList = query.list();
 	        session.delete(customerList.get(0));
+	        System.out.println("To delete: " + customerList.get(0));
 	        
 			tx.commit();
 		} catch (HibernateException e) {

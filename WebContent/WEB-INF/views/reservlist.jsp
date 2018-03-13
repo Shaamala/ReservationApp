@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-${reserdetail}
+
 <br>
 <form action="searchbyreserve">
 <input type="text" name="dropOff">
@@ -17,6 +17,13 @@ ${reserdetail}
 
 
 <table border="1" >
+			<tr>
+					<th>First Name
+					<th>Last Name
+					<th>Dog Name
+					<th>Drop off Date
+					<th>Pick up Date
+					<th>Home Phone
 
 			<c:forEach var="reserve" items="${RList}">
 
@@ -33,6 +40,6 @@ ${reserdetail}
 
 		</c:forEach>
 </table>
-${RList}
+
 </body>
 </html>

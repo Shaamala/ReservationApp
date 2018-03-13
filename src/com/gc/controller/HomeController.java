@@ -1,12 +1,9 @@
 package com.gc.controller;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.hibernate.Criteria;
-
 import org.hibernate.HibernateException;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -23,9 +20,6 @@ import com.gc.dao.CustomerDaoImp;
 import com.gc.dao.DogsDaoImp;
 import com.gc.model.Customers;
 import com.gc.model.Dogs;
-
-
-
 import com.gc.util.HibernateUtil;
 import com.mailjet.client.ClientOptions;
 import com.mailjet.client.MailjetClient;
@@ -136,10 +130,9 @@ public class HomeController {
 		customer.setEmrgTel(emrgTel);
 		customer.setVetName(vetName);
 		customer.setVetTel(vetTel);
-		customer.setDogName(dogName);
+		customer.setDog(dogName);
 		customer.setDropOff(dropOff);
 		customer.setPickUp(pickUp);
-		customer.setDogName(dogName);
 		customer.setDropOff(dropOff);
 		customer.setPickUp(pickUp);
 
@@ -206,7 +199,7 @@ public class HomeController {
 		customer.setEmrgTel(emrgTel);
 		customer.setVetName(vetName);
 		customer.setVetTel(vetTel);
-		customer.setDogName(dogName);
+		customer.setDog(dogName);
 		customer.setDropOff(dropOff);
 		customer.setPickUp(pickUp);
 
@@ -257,7 +250,7 @@ public class HomeController {
 		customer.setEmrgTel(emrgTel);
 		customer.setVetName(vetName);
 		customer.setVetTel(vetTel);
-		customer.setDogName(dogName);
+		customer.setDog(dogName);
 		customer.setDropOff(dropOff);
 		customer.setPickUp(pickUp);
 
@@ -305,6 +298,16 @@ public class HomeController {
 		return new ModelAndView("dogList", "addDog", msg);
 
 	}
+	// delete dog
+		@RequestMapping("deletedog")
+		public ModelAndView deleteDog(@RequestParam("id") int dogID) {
+
+			System.out.println(dogID);
+			DogsDaoImp testD = new DogsDaoImp();
+			testD.deleteDogs(dogID);
+			ArrayList<Dogs> dogList = listAllDogs();
+			return new ModelAndView("dogList", "dList", dogList);
+		}
 	// search in customer list by drop off date
 	@RequestMapping("searchbydate")
 	public ModelAndView searchreserve(@RequestParam("dropOff") String date) {
