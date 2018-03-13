@@ -5,22 +5,23 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-
 <title>Customers List</title>
 </head>
 <body>
 
+<div style="text-align: center">
+				<a href="index.html">Home</a>
+				<a href="customerList.html">Customers</a>
+				<a href="dogList.html">Dogs</a>
+				<a href="reservationList.html">Reservation</a>
+</div>
+
+<br>
+<br>
 <form action="searchbydate">
 <input type="text" name="dropOff">
 <input type="submit" value="Search By date">
-</form>
-
-<title>Customer List</title>
-</head>
-<body>
-
-
-
+</form><br>
 <table border="1" >
 
 				<tr>

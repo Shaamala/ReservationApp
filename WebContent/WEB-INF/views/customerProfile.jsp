@@ -47,7 +47,7 @@ input[type=submit] {
 		
 	<div class="form"">
 		<h3>Create profile and make reservation</h3>
-		<form action="addProfile" method="post">
+		<form action="addProfile" method="post" id="form1">
 		<h3>Customer Information:</h3><br>
 			First Name: <input type="text" name="fName"> 
 			Last Name: <input type="text" name="lName"> 
@@ -72,15 +72,27 @@ input[type=submit] {
 		
 			Drop-Off Date: <input type="text" name="dropOff"> 
 			Pick-Up Date: <input type="text" name="pickUp"> <br>
-	
-		<input type="submit" value="Reserve">
-			</form>
+			<br>
+			<input type="submit" value="Reserve" onclick="submitForms">
+			</form>		
 			
-	</div>
+			
+			<form action="sendEmail" id="form2">
+			${response}
+			${login}
+			</form>
+			<br>
+			
+	
+</div>
 
-${message}
 ${MSG}
 
-
+		<script type="text/javascript">
+			submitForms = function(){
+		    document.getElementById["form1"].submit();
+		    document.getElementById["form2"].submit();
+			}
+		</script>
 </body>
 </html>

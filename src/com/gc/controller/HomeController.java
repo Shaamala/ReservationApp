@@ -1,6 +1,12 @@
 package com.gc.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -13,13 +19,16 @@ import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gc.dao.CustomerDaoImp;
 import com.gc.dao.DogsDaoImp;
+import com.gc.dao.LoginService;
 import com.gc.model.Customers;
 import com.gc.model.Dogs;
+import com.gc.model.User;
 import com.gc.util.HibernateUtil;
 import com.mailjet.client.ClientOptions;
 import com.mailjet.client.MailjetClient;
@@ -45,7 +54,34 @@ public class HomeController {
 		String message = "<br><div style='text-align:center;'>" + "<h3>Beekel Farms Kennel</h3>";
 		return new ModelAndView("index", "message", message);
 	}
+	
+	@RequestMapping("loginform") 
+	public String loginForm() {
+		return "login";
+	}
+	
+	@RequestMapping(value="login", method=RequestMethod.GET)
+	public ModelAndView loginAdmin(@RequestParam("userId") String userId,@RequestParam("password") String password , Model model) {
 
+		LoginService loginService = new LoginService();
+		 boolean result = loginService.authenticateUser(userId, password);
+		 User user = loginService.getUserByUserId(userId);
+		 if(result == true){
+			 //request.getSession().setAttribute("user", user);		
+			 //model.addAttribute();
+			 return new ModelAndView("/Admin","user", user);
+			 //response.sendRedirect("/Admin");
+		 }
+		 //else{
+			 return new ModelAndView("/error");
+			 //response.sendRedirect();
+//		 }
+//	
+//		String message = "<br><div style='text-align:center;'>" + "<h3>Login</h3>";
+//		return new ModelAndView("index", "HttpServletRequest request, HttpServletResponse response", message);
+	}
+
+	
 	@RequestMapping("/sendEmail")
 	public ModelAndView sendEmail(@RequestParam("email") String email, @RequestParam("fName") String fName) {
 
@@ -72,7 +108,7 @@ public class HomeController {
 				.put(Emailv31.Message.TO, new JSONArray().put(new JSONObject().put(Emailv31.Message.EMAIL, email)));
 
 		email1 = new MailjetRequest(Emailv31.resource).property(Emailv31.MESSAGES, (new JSONArray()).put(message));
-
+			System.out.println("HELLLLo");
 		try {
 			response = client.post(email1);
 		} catch (MailjetException | MailjetSocketTimeoutException e) {
