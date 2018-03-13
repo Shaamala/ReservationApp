@@ -15,5 +15,8 @@ ${user}
 				<a href="dogList.html">Dogs</a>
 				<a href="reservationList.html">listReservation</a>
 </div>
+
+<h1>Email Stats</h1>
+	${emailStats}
 </body>
 </html>

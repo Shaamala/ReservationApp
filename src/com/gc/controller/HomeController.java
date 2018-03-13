@@ -82,17 +82,19 @@ public class HomeController {
 	}
 
 	
-	@RequestMapping("/sendEmail")
-	public ModelAndView sendEmail(@RequestParam("email") String email, @RequestParam("fName") String fName) {
+	/*@RequestMapping("/addProfile")
+	public ModelAndView sendEmails(@RequestParam("email") String email, @RequestParam("fName") String fName) {
 
+		MailjetResponse response = sendEmail(email, fName);
+
+		return new ModelAndView("index", "response", response.getStatus());
+	}*/
+
+	private MailjetResponse sendEmail(String email, String fName, String dogName, String dropOff, String pickUp) {
 		MailjetRequest email1;
 		MailjetResponse response = null;
 
-		// Note how we set the version to v3.1 using ClientOptions
-		// MailjetClient client = new
-		// MailjetClient(System.getenv("737eb42ade92225b46e471d3d091fa80"),
-		// System.getenv("3ffa02400a98cb6aeaf190ede5f50b5e"), new
-		// ClientOptions("v3.1"));
+	
 		MailjetClient client = new MailjetClient(System.getProperty("PublicKey"), System.getProperty("PrivateKey"),
 				new ClientOptions("v3.1"));
 
@@ -101,10 +103,9 @@ public class HomeController {
 				new JSONObject().put(Emailv31.Message.EMAIL, "malarbw@umich.edu").put(Emailv31.Message.NAME,
 						"Administrator"))
 				.put(Emailv31.Message.SUBJECT, "RESERVATION CONFRIMATION")
-				.put(Emailv31.Message.TEXTPART, "Dear " + fName + ", thanks for reserving with our kennel.")
-				// .put(Emailv31.Message.HTMLPART,
-				// "<h3>Dear passenger, welcome to Mailjet</h3><br/>May the delivery force be
-				// with you!")
+				.put(Emailv31.Message.TEXTPART, "Dear " + fName + ", thanks for reserving with our kennel." + " Your dog " + dogName + " will be staying with us from " 
+						+ dropOff + " to " + pickUp )
+				
 				.put(Emailv31.Message.TO, new JSONArray().put(new JSONObject().put(Emailv31.Message.EMAIL, email)));
 
 		email1 = new MailjetRequest(Emailv31.resource).property(Emailv31.MESSAGES, (new JSONArray()).put(message));
@@ -115,8 +116,7 @@ public class HomeController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		return new ModelAndView("sendEmail", "response", response.getStatus());
+		return response;
 	}
 
 	@RequestMapping("/reserve")
@@ -136,23 +136,7 @@ public class HomeController {
 
 		JSONArray arr = (response.getData());
 
-		// ClickedCount : 0
-		// TransactionalCount : 0
-		// QueuedCount : 0
-		// SpamComplaintCount : 0
-		// AverageOpenedCount : 0
-		// TotalClicksCount : 0
-		// BlockedCount : 0
-		// AverageOpenDelay : 0
-		// AverageClickedCount : 0
-		// BouncedCount : 0
-		// OpenedCount : 0
-		// AverageClickDelay : 0
-		// DeliveredCount : 0
-		// TotalOpensCount : 0
-		// UnsubscribedCount : 0
-		// ProcessedCount : 0
-		// CampaignCount : 0
+		
 		JSONObject json = arr.getJSONObject(0);
 		String clickedCount = json.get("ClickedCount").toString();
 		clickedCount = "<h6>Clicked Count: " + clickedCount + "</h6>";
@@ -169,18 +153,7 @@ public class HomeController {
 		String blockedCount = json.get("BlockedCount").toString();
 		blockedCount = "<h6>Blocked Count: " + blockedCount + "</h6>";
 		
-		// String clickedCount = arr.getJSONObject(0).toString();
-		// int count = 0;
-		// for (int i = 0; i < arr.length(); i++) {
-		// stats += ("<h6>" + arr.getJSONObject(i).toString() + "</h6>");
-		// //System.out.println("Count : " + i);
-		// ++count;
-		// System.out.println(arr.getJSONObject(i).toString());
-		//
-		//
-		// }
-
-		//model.addAttribute("stats", stats + "<br> " + count);
+		
 		return new ModelAndView("reserve", "emailStats", clickedCount + deliveredCount + openedCount + spamComplaint + blockedCount);
 	}
 
@@ -251,8 +224,12 @@ public class HomeController {
 		DogsDaoImp testD = new DogsDaoImp();
 		testD.addDogs(dog);
 		String msg = "Profile created.";
+		MailjetResponse response = sendEmail(email, fName, dogName, dropOff, pickUp);
 
-		return new ModelAndView("reserve", "MSG", msg);
+		
+		
+
+		return new ModelAndView("index", "MSG", msg + response);
 
 	}
 

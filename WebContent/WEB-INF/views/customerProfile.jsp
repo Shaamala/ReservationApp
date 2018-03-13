@@ -77,10 +77,7 @@ input[type=submit] {
 			</form>		
 			
 			
-			<form action="sendEmail" id="form2">
-			${response}
-			${login}
-			</form>
+			
 			<br>
 			
 	
@@ -88,11 +85,6 @@ input[type=submit] {
 
 ${MSG}
 
-		<script type="text/javascript">
-			submitForms = function(){
-		    document.getElementById["form1"].submit();
-		    document.getElementById["form2"].submit();
-			}
-		</script>
+	
 </body>
 </html>
