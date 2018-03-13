@@ -82,23 +82,70 @@ public class HomeController {
 
 		return new ModelAndView("sendEmail", "response", response.getStatus());
 	}
-	
-	@RequestMapping("")
-	public ModelAndView emailStats() {
-		  MailjetClient client;
-	      MailjetRequest request;
-	      MailjetResponse response = null;
-	      client = new MailjetClient(System.getProperty("PublicKey"), System.getProperty("PrivateKey"));
-	      request = new MailjetRequest(Messagestatistics.resource);
-	      try {
+
+	@RequestMapping("/reserve")
+	public ModelAndView emailStats(Model model) {
+		MailjetClient client;
+		MailjetRequest request;
+		MailjetResponse response = null;
+		String stats = "";
+		client = new MailjetClient(System.getProperty("PublicKey"), System.getProperty("PrivateKey"));
+		request = new MailjetRequest(Messagestatistics.resource);
+		try {
 			response = client.get(request);
 		} catch (MailjetException | MailjetSocketTimeoutException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	      System.out.println(response.getStatus());
-	      System.out.println(response.getData());
-		return new ModelAndView ("","","");
+
+		JSONArray arr = (response.getData());
+
+		// ClickedCount : 0
+		// TransactionalCount : 0
+		// QueuedCount : 0
+		// SpamComplaintCount : 0
+		// AverageOpenedCount : 0
+		// TotalClicksCount : 0
+		// BlockedCount : 0
+		// AverageOpenDelay : 0
+		// AverageClickedCount : 0
+		// BouncedCount : 0
+		// OpenedCount : 0
+		// AverageClickDelay : 0
+		// DeliveredCount : 0
+		// TotalOpensCount : 0
+		// UnsubscribedCount : 0
+		// ProcessedCount : 0
+		// CampaignCount : 0
+		JSONObject json = arr.getJSONObject(0);
+		String clickedCount = json.get("ClickedCount").toString();
+		clickedCount = "<h6>Clicked Count: " + clickedCount + "</h6>";
+		
+		String deliveredCount = json.get("DeliveredCount").toString();
+		deliveredCount = "<h6>Delivered Count: " + deliveredCount + "</h6>";
+		
+		String openedCount = json.get("OpenedCount").toString();
+		openedCount = "<h6>Opened Count: " + openedCount + "</h6>";
+		
+		String spamComplaint = json.get("SpamComplaintCount").toString();
+		spamComplaint = "<h6>Spam Complaint Count: " + spamComplaint + "</h6>";
+		
+		String blockedCount = json.get("BlockedCount").toString();
+		blockedCount = "<h6>Blocked Count: " + blockedCount + "</h6>";
+		
+		// String clickedCount = arr.getJSONObject(0).toString();
+		// int count = 0;
+		// for (int i = 0; i < arr.length(); i++) {
+		// stats += ("<h6>" + arr.getJSONObject(i).toString() + "</h6>");
+		// //System.out.println("Count : " + i);
+		// ++count;
+		// System.out.println(arr.getJSONObject(i).toString());
+		//
+		//
+		// }
+
+		//model.addAttribute("stats", stats + "<br> " + count);
+		return new ModelAndView("reserve", "emailStats", clickedCount + deliveredCount + openedCount + spamComplaint + blockedCount);
 	}
 
 	@RequestMapping("/pricing")
@@ -117,13 +164,12 @@ public class HomeController {
 		return new ModelAndView("customerProfile", "message", message);
 	}
 
-	@RequestMapping("/reserve")
+	// @RequestMapping("/reserve")
 	public ModelAndView reservation() {
 
 		String message = "<br><div style='text-align:center;'>" + "<h3>Beekel Farms Kennel</h3>";
 		return new ModelAndView("reserve", "message", message);
 	}
-
 
 	// Create Customer profile
 	@RequestMapping(value = "addProfile")
@@ -226,7 +272,7 @@ public class HomeController {
 		testC.addCustomers(customer);
 
 		String msg = "<br><div style='text-align:center;'>" + "<h4>Customer added successfully</h4>";
-		
+
 		return new ModelAndView("customerList", "addCustomer", msg);
 
 	}
@@ -284,7 +330,8 @@ public class HomeController {
 		ArrayList<Dogs> dogList = listAllDogs();
 		return new ModelAndView("dogList", "dList", dogList);
 	}
-	//method list all dogs from database 
+
+	// method list all dogs from database
 	public ArrayList<Dogs> listAllDogs() throws HibernateException {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
@@ -298,7 +345,8 @@ public class HomeController {
 		session.close();
 		return dogList;
 	}
-	//add dog manual
+
+	// add dog manual
 	@RequestMapping(value = "adddog")
 	public ModelAndView adddog(@RequestParam("dogName") String dogName, @RequestParam("breed") String breed,
 			@RequestParam("size") String size, @RequestParam("food") String food, @RequestParam("owner") String owner) {
@@ -317,16 +365,18 @@ public class HomeController {
 		return new ModelAndView("dogList", "addDog", msg);
 
 	}
-	// delete dog
-		@RequestMapping("deletedog")
-		public ModelAndView deleteDog(@RequestParam("id") int dogID) {
 
-			System.out.println(dogID);
-			DogsDaoImp testD = new DogsDaoImp();
-			testD.deleteDogs(dogID);
-			ArrayList<Dogs> dogList = listAllDogs();
-			return new ModelAndView("dogList", "dList", dogList);
-		}
+	// delete dog
+	@RequestMapping("deletedog")
+	public ModelAndView deleteDog(@RequestParam("id") int dogID) {
+
+		System.out.println(dogID);
+		DogsDaoImp testD = new DogsDaoImp();
+		testD.deleteDogs(dogID);
+		ArrayList<Dogs> dogList = listAllDogs();
+		return new ModelAndView("dogList", "dList", dogList);
+	}
+
 	// search in customer list by drop off date
 	@RequestMapping("searchbydate")
 	public ModelAndView searchreserve(@RequestParam("dropOff") String date) {
@@ -342,6 +392,7 @@ public class HomeController {
 
 		return new ModelAndView("customerList", "cList", customerList);
 	}
+
 	// search in dog list by dog name
 	@RequestMapping("searchbydog")
 	public ModelAndView searchdog(@RequestParam("dogName") String dogName) {
@@ -357,6 +408,7 @@ public class HomeController {
 
 		return new ModelAndView("dogList", "dList", dogList);
 	}
+
 	// display reservation list
 	@RequestMapping("reservationList")
 	public ModelAndView reservationList(Model model) {
@@ -366,6 +418,7 @@ public class HomeController {
 		model.addAttribute("reserdetail", reserveList);
 		return new ModelAndView("reservlist", "RList", reserveList);
 	}
+
 	// search in reservation list by drop off date
 	@RequestMapping("searchbyreserve")
 	public ModelAndView searchDate(@RequestParam("dropOff") String dropOff) {
