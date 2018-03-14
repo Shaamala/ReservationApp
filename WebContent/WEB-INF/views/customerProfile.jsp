@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+b<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -51,28 +51,28 @@ input[type=submit] {
 			<h3>Customer Information:</h3><br>
 				First Name: <input type="text" id="firstName" name="fName"> 
 				Last Name: <input type="text" id="lastName" name="lName"> 
-				Street: <input type="text" name="street">
-				City: <input type="text" name="city">
-				State: <input type="text" name="state"> 
-				Zip Code: <input type="text" name="zip">
-				Email: <input type="text" name="email">  
-				Home Phone: <input type="text" name="homeTel"> 
-				Emergency Number: <input type="text" name="emrgTel"> 
-				Veterinarian : <input type="text" name="vetName"> 
-				Vet Phone Number: <input type="text" name="vetTel"> <br>
+				Street: <input type="text" id="street" name="street">
+				City: <input type="text" id="city" name="city">
+				State: <input type="text" id="state" name="state"> 
+				Zip Code: <input type="text" id="zip" name="zip">
+				Email: <input type="text" id="email" name="email">  
+				Home Phone: <input type="text" id="homeTel" name="homeTel"> 
+				Emergency Number: <input type="text" id="emrgTel" name="emrgTel"> 
+				Veterinarian : <input type="text" id="vetName" name="vetName"> 
+				Vet Phone Number: <input type="text" id="vetTel" name="vetTel"> <br>
 			
 			<h3>Dog Information:</h3><br>
 			
-				Dog Name: <input type="text" name="dogName"> 
-				Breed: <input type="text" name="breed"> 
-				Size: <input type="text" name="size"> 
-				Food: <input type="text" name="food"><br>
+				Dog Name: <input type="text" id="dogName" name="dogName"> 
+				Breed: <input type="text" id="breed" name="breed"> 
+				Size: <input type="text" id="size" name="size"> 
+				Food: <input type="text" id="food" name="food"><br>
 				
 			
 			<h3>Date:</h3><br>
 		
-				Drop-Off Date: <input type="text" name="dropOff"> 
-				Pick-Up Date: <input type="text" name="pickUp"> <br>
+				Drop-Off Date: <input type="text" id="dropOff" name="dropOff"> 
+				Pick-Up Date: <input type="text" id="pickUp" name="pickUp"> <br>
 			<br>
 			<input type="submit" value="Reserve">
 		</form>		
@@ -91,106 +91,107 @@ function validateForm() {
     
     var a = document.getElementById("firstName").value;
     if (!a) {
-        alert("Name must be filled out");
+        alert("First name must be filled out");
         return false;
     }
     
-   /* 
-   var b = document.forms["myForm"]["lName"].value;
-    if (b == "") {
-        alert("Name must be filled out");
+   
+   var b = document.getElementById("lastname").value;
+    if (!b) {
+        alert("Last name must be filled out");
         return false;
     }
     
-    var c = document.forms["myForm"]["street"].value;
-    if (c == "") {
+    var c = document.getElementById("street").value;
+    if (!c) {
         alert("Street must be filled out");
         return false;
     }
     
-    var d = document.forms["myForm"]["city"].value;
-    if (d == "") {
+    var d = document.getElementById("city").value;
+    if (!d) {
         alert("City must be filled out");
         return false;
     }
     
-    var e = document.forms["myForm"]["state"].value;
-    if (e == "") {
+    var e = document.getElementById("state").value;
+    if (!e) {
         alert("State must be filled out");
         return false;
     }
     
-    var f = document.forms["myForm"]["zip"].value;
-    if (f == "") {
-        alert("Zip code must be filled out");
+    var f = document.getElementById("zip").value;
+    if (!f) {
+        alert("Zip must be filled out");
         return false;
     }
     
-    var g = document.forms["myForm"]["email"].value;
-    if (g == "") {
+    
+    var g = document.getElementById("email").value;
+    if (!g) {
         alert("Email must be filled out");
         return false;
     }
     
-    var h = document.forms["myForm"]["homeTel"].value;
-    if (h == "") {
-        alert("Home Telephone must be filled out");
+    var h = document.getElementById("homeTel").value;
+    if (!h) {
+        alert("Home telephone number must be filled out");
         return false;
     }
     
-    var i = document.forms["myForm"]["emrgTel"].value;
-    if (i == "") {
-        alert("Emergency Number must be filled out");
+    var i = document.getElementById("emrgTel").value;
+    if (!i) {
+        alert("Emergency telephone number must be filled out");
         return false;
     }
     
-    var j = document.forms["myForm"]["vetName"].value;
-    if (j == "") {
+    var j = document.getElementById("vetName").value;
+    if (!j) {
         alert("Veterinarian name must be filled out");
         return false;
     }
     
-    var k = document.forms["myForm"]["vetTel"].value;
-    if (k == "") {
+    var k = document.getElementById("vetTel").value;
+    if (!k) {
         alert("Veterinarian telephone number must be filled out");
         return false;
     }
     
-    var l = document.forms["myForm"]["dogName"].value;
-    if (l == "") {
+    var l = document.getElementById("dogName").value;
+    if (!l) {
         alert("Dog name must be filled out");
         return false;
     }
     
-    var m = document.forms["myForm"]["breed"].value;
-    if (m == "") {
+    var m = document.getElementById("breed").value;
+    if (!m) {
         alert("Breed must be filled out");
         return false;
     }
     
-    var n = document.forms["myForm"]["size"].value;
-    if (n == "") {
+    var n = document.getElementById("size").value;
+    if (!n) {
         alert("Dog size must be filled out");
         return false;
     }
     
-    var o = document.forms["myForm"]["food"].value;
-    if (o == "") {
-        alert("Dog food preference must be filled out");
+    var o = document.getElementById("food").value;
+    if (!o) {
+        alert("Dog food must be filled out");
         return false;
     }
     
-    var p = document.forms["myForm"]["dropOff"].value;
-    if (p == "") {
+    var p = document.getElementById("dropOff").value;
+    if (!p) {
         alert("Drop off date must be filled out (YYYY-MM-DD)");
         return false;
     }
     
-    var q = document.forms["myForm"]["pickUp"].value;
-    if (q == "") {
+    var q = document.getElementById("pickUp").value;
+    if (!q) {
         alert("Pick up date must be filled out (YYYY-MM-DD)");
         return false;
-    } */
+    }
 }
 
 </script>
