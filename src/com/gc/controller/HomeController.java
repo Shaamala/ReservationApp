@@ -1,12 +1,6 @@
 package com.gc.controller;
 
-import java.io.IOException;
 import java.util.ArrayList;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -60,7 +54,7 @@ public class HomeController {
 		return "login";
 	}
 	
-	@RequestMapping(value="login", method=RequestMethod.GET)
+	@RequestMapping(value="login", method=RequestMethod.POST)
 	public ModelAndView loginAdmin(@RequestParam("userId") String userId,@RequestParam("password") String password , Model model) {
 
 		LoginService loginService = new LoginService();
@@ -82,19 +76,17 @@ public class HomeController {
 	}
 
 	
-	/*@RequestMapping("/addProfile")
-	public ModelAndView sendEmails(@RequestParam("email") String email, @RequestParam("fName") String fName) {
+	@RequestMapping("/sendEmail")
+	public ModelAndView sendEmail(@RequestParam("email") String email, @RequestParam("fName") String fName) {
 
-		MailjetResponse response = sendEmail(email, fName);
-
-		return new ModelAndView("index", "response", response.getStatus());
-	}*/
-
-	private MailjetResponse sendEmail(String email, String fName, String dogName, String dropOff, String pickUp) {
 		MailjetRequest email1;
 		MailjetResponse response = null;
 
-	
+		// Note how we set the version to v3.1 using ClientOptions
+		// MailjetClient client = new
+		// MailjetClient(System.getenv("737eb42ade92225b46e471d3d091fa80"),
+		// System.getenv("3ffa02400a98cb6aeaf190ede5f50b5e"), new
+		// ClientOptions("v3.1"));
 		MailjetClient client = new MailjetClient(System.getProperty("PublicKey"), System.getProperty("PrivateKey"),
 				new ClientOptions("v3.1"));
 
@@ -103,9 +95,10 @@ public class HomeController {
 				new JSONObject().put(Emailv31.Message.EMAIL, "malarbw@umich.edu").put(Emailv31.Message.NAME,
 						"Administrator"))
 				.put(Emailv31.Message.SUBJECT, "RESERVATION CONFRIMATION")
-				.put(Emailv31.Message.TEXTPART, "Dear " + fName + ", thanks for reserving with our kennel." + " Your dog " + dogName + " will be staying with us from " 
-						+ dropOff + " to " + pickUp )
-				
+				.put(Emailv31.Message.TEXTPART, "Dear " + fName + ", thanks for reserving with our kennel.")
+				// .put(Emailv31.Message.HTMLPART,
+				// "<h3>Dear passenger, welcome to Mailjet</h3><br/>May the delivery force be
+				// with you!")
 				.put(Emailv31.Message.TO, new JSONArray().put(new JSONObject().put(Emailv31.Message.EMAIL, email)));
 
 		email1 = new MailjetRequest(Emailv31.resource).property(Emailv31.MESSAGES, (new JSONArray()).put(message));
@@ -116,45 +109,26 @@ public class HomeController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return response;
-	}
 
-	@RequestMapping("/reserve")
-	public ModelAndView emailStats(Model model) {
-		MailjetClient client;
-		MailjetRequest request;
-		MailjetResponse response = null;
-		String stats = "";
-		client = new MailjetClient(System.getProperty("PublicKey"), System.getProperty("PrivateKey"));
-		request = new MailjetRequest(Messagestatistics.resource);
-		try {
+		return new ModelAndView("sendEmail", "response", response.getStatus());
+	}
+	
+	@RequestMapping("")
+	public ModelAndView emailStats() {
+		  MailjetClient client;
+	      MailjetRequest request;
+	      MailjetResponse response = null;
+	      client = new MailjetClient(System.getProperty("PublicKey"), System.getProperty("PrivateKey"));
+	      request = new MailjetRequest(Messagestatistics.resource);
+	      try {
 			response = client.get(request);
 		} catch (MailjetException | MailjetSocketTimeoutException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		JSONArray arr = (response.getData());
-
-		
-		JSONObject json = arr.getJSONObject(0);
-		String clickedCount = json.get("ClickedCount").toString();
-		clickedCount = "<h6>Clicked Count: " + clickedCount + "</h6>";
-		
-		String deliveredCount = json.get("DeliveredCount").toString();
-		deliveredCount = "<h6>Delivered Count: " + deliveredCount + "</h6>";
-		
-		String openedCount = json.get("OpenedCount").toString();
-		openedCount = "<h6>Opened Count: " + openedCount + "</h6>";
-		
-		String spamComplaint = json.get("SpamComplaintCount").toString();
-		spamComplaint = "<h6>Spam Complaint Count: " + spamComplaint + "</h6>";
-		
-		String blockedCount = json.get("BlockedCount").toString();
-		blockedCount = "<h6>Blocked Count: " + blockedCount + "</h6>";
-		
-		
-		return new ModelAndView("reserve", "emailStats", clickedCount + deliveredCount + openedCount + spamComplaint + blockedCount);
+	      System.out.println(response.getStatus());
+	      System.out.println(response.getData());
+		return new ModelAndView ("","","");
 	}
 
 	@RequestMapping("/pricing")
@@ -173,12 +147,13 @@ public class HomeController {
 		return new ModelAndView("customerProfile", "message", message);
 	}
 
-	// @RequestMapping("/reserve")
+	@RequestMapping("/reserve")
 	public ModelAndView reservation() {
 
 		String message = "<br><div style='text-align:center;'>" + "<h3>Beekel Farms Kennel</h3>";
 		return new ModelAndView("reserve", "message", message);
 	}
+
 
 	// Create Customer profile
 	@RequestMapping(value = "addProfile")
@@ -224,12 +199,8 @@ public class HomeController {
 		DogsDaoImp testD = new DogsDaoImp();
 		testD.addDogs(dog);
 		String msg = "Profile created.";
-		MailjetResponse response = sendEmail(email, fName, dogName, dropOff, pickUp);
 
-		
-		
-
-		return new ModelAndView("index", "MSG", msg + response);
+		return new ModelAndView("reserve", "MSG", msg);
 
 	}
 
@@ -285,7 +256,7 @@ public class HomeController {
 		testC.addCustomers(customer);
 
 		String msg = "<br><div style='text-align:center;'>" + "<h4>Customer added successfully</h4>";
-
+		
 		return new ModelAndView("customerList", "addCustomer", msg);
 
 	}
@@ -343,8 +314,7 @@ public class HomeController {
 		ArrayList<Dogs> dogList = listAllDogs();
 		return new ModelAndView("dogList", "dList", dogList);
 	}
-
-	// method list all dogs from database
+	//method list all dogs from database 
 	public ArrayList<Dogs> listAllDogs() throws HibernateException {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
@@ -358,8 +328,7 @@ public class HomeController {
 		session.close();
 		return dogList;
 	}
-
-	// add dog manual
+	//add dog manual
 	@RequestMapping(value = "adddog")
 	public ModelAndView adddog(@RequestParam("dogName") String dogName, @RequestParam("breed") String breed,
 			@RequestParam("size") String size, @RequestParam("food") String food, @RequestParam("owner") String owner) {
@@ -378,18 +347,16 @@ public class HomeController {
 		return new ModelAndView("dogList", "addDog", msg);
 
 	}
-
 	// delete dog
-	@RequestMapping("deletedog")
-	public ModelAndView deleteDog(@RequestParam("id") int dogID) {
+		@RequestMapping("deletedog")
+		public ModelAndView deleteDog(@RequestParam("id") int dogID) {
 
-		System.out.println(dogID);
-		DogsDaoImp testD = new DogsDaoImp();
-		testD.deleteDogs(dogID);
-		ArrayList<Dogs> dogList = listAllDogs();
-		return new ModelAndView("dogList", "dList", dogList);
-	}
-
+			System.out.println(dogID);
+			DogsDaoImp testD = new DogsDaoImp();
+			testD.deleteDogs(dogID);
+			ArrayList<Dogs> dogList = listAllDogs();
+			return new ModelAndView("dogList", "dList", dogList);
+		}
 	// search in customer list by drop off date
 	@RequestMapping("searchbydate")
 	public ModelAndView searchreserve(@RequestParam("dropOff") String date) {
@@ -405,7 +372,6 @@ public class HomeController {
 
 		return new ModelAndView("customerList", "cList", customerList);
 	}
-
 	// search in dog list by dog name
 	@RequestMapping("searchbydog")
 	public ModelAndView searchdog(@RequestParam("dogName") String dogName) {
@@ -421,7 +387,6 @@ public class HomeController {
 
 		return new ModelAndView("dogList", "dList", dogList);
 	}
-
 	// display reservation list
 	@RequestMapping("reservationList")
 	public ModelAndView reservationList(Model model) {
@@ -431,7 +396,6 @@ public class HomeController {
 		model.addAttribute("reserdetail", reserveList);
 		return new ModelAndView("reservlist", "RList", reserveList);
 	}
-
 	// search in reservation list by drop off date
 	@RequestMapping("searchbyreserve")
 	public ModelAndView searchDate(@RequestParam("dropOff") String dropOff) {
