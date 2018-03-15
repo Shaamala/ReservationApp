@@ -115,9 +115,12 @@ $(window).load(function() {
 </div>	
 </div>
 </div>
-${user}
+
 
 <h1>Email Stats</h1>
+
+	
+
 	${emailStats}
 </body>
 </html>

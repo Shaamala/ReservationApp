@@ -61,13 +61,16 @@ public class HomeController {
 		 boolean result = loginService.authenticateUser(userId, password);
 		 User user = loginService.getUserByUserId(userId);
 		 if(result == true){
-			 return new ModelAndView("redirect:/Admin","user", "");
+
+			 return new ModelAndView("redirect:/Admin","user", user);
+
 			
 		 }
 		 
 			 return new ModelAndView("/error");
 	}
 	
+
 	private MailjetResponse sendEmail(String email, String fName, String dogName, String dropOff, String pickUp) {
 		MailjetRequest email1;
 		MailjetResponse response = null;
@@ -96,13 +99,15 @@ public class HomeController {
 		}
 		return response;
 	}
+	
+	
 
 	@RequestMapping("Admin")
 	public ModelAndView emailStats(Model model) {
 		MailjetClient client;
 		MailjetRequest request;
 		MailjetResponse response = null;
-		String stats = "";
+		
 		client = new MailjetClient(System.getProperty("PublicKey"), System.getProperty("PrivateKey"));
 		request = new MailjetRequest(Messagestatistics.resource);
 		try {
@@ -117,30 +122,23 @@ public class HomeController {
 		
 		JSONObject json = arr.getJSONObject(0);
 		String clickedCount = json.get("ClickedCount").toString();
-		//clickedCount = "<h6>Clicked Count: " + clickedCount + "</h6>";
+		clickedCount = "<h6>Clicked Count: " + clickedCount + "</h6>";
 		
 		String deliveredCount = json.get("DeliveredCount").toString();
-		//deliveredCount = "<h6>Delivered Count: " + deliveredCount + "</h6>";
+		deliveredCount = "<h6>Delivered Count: " + deliveredCount + "</h6>";
 		
 		String openedCount = json.get("OpenedCount").toString();
-		//openedCount = "<h6>Opened Count: " + openedCount + "</h6>";
+		openedCount = "<h6>Opened Count: " + openedCount + "</h6>";
 		
 		String spamComplaint = json.get("SpamComplaintCount").toString();
-		//spamComplaint = "<h6>Spam Complaint Count: " + spamComplaint + "</h6>";
+		spamComplaint = "<h6>Spam Complaint Count: " + spamComplaint + "</h6>";
 		
 		String blockedCount = json.get("BlockedCount").toString();
-		//blockedCount = "<h6>Blocked Count: " + blockedCount + "</h6>";
-		System.out.println(clickedCount);
-		model.addAttribute("clickedCount", clickedCount);
-		model.addAttribute("deliveredCount", deliveredCount);
-		model.addAttribute("openedCount", openedCount);
-		model.addAttribute("blockedCount", blockedCount);
-		model.addAttribute("spamComplaint", spamComplaint);
-		
-		String test = "test";
-		
-		
-		return new ModelAndView("Admin", "emailStats", test);
+		blockedCount = "<h6>Blocked Count: " + blockedCount + "</h6>";
+	
+
+		return new ModelAndView("Admin", "emailStats", clickedCount + deliveredCount + openedCount + spamComplaint + blockedCount );
+
 }
 
 	@RequestMapping("/pricing")
@@ -205,10 +203,10 @@ public class HomeController {
 		DogsDaoImp testD = new DogsDaoImp();
 		testD.addDogs(dog);
 		String msg = "Profile created.";
-
 		MailjetResponse response = sendEmail(email, fName, dogName, dropOff, pickUp);
-		
+
 		return new ModelAndView("index", "MSG", msg);
+
 
 	}
 

@@ -200,7 +200,7 @@ $(window).load(function() {
 <div class="menu_bot">
     <ul id="menu_bot" class="clearfix">
       <li><a class="active" href="index.html">Home</a></li>				
-				<li><a class= "active" href="pricing.html">Pricing</a></li>
+				<li><a class= "active" href="pricing.html">About</a></li>
 				<li><a class= "active" href="customerProfile.html">Reservation</a></li>	
 				<li><a class= "active" href="loginform.html">Administration</a></li>            
     </ul>

@@ -121,30 +121,30 @@ $(window).load(function() {
 		<form name="myForm" onsubmit="return validateForm()" class="form-horizontal" action="addProfile" method="post">
 		<h3>Customer Information:</h3><br>
 		
-		<input class="span5" type="text" name="fName" placeholder="First Name"> <br><br>
-		<input class="span5" type="text" name="lName" placeholder="Last Name"><br><br>
-		<input class="span5" type="text" name="street" placeholder="Street"><br><br>
-		<input class="span5" type="text" name="city" placeholder="City"> <br><br>
-		<input class="span5" type="text" name="state" placeholder="State"> <br><br>
-		<input class="span5" type="text" name="zip" placeholder="Zip Code"> <br><br>
-		<input class="span5" type="text" name="email" placeholder="Email">  <br><br>
-		<input class="span5" type="text" name="homeTel" placeholder="Home Phone"> <br><br>
-		<input class="span5" type="text" name="emrgTel" placeholder="Emergency Number"><br><br>
-		<input class="span5" type="text" name="vetName" placeholder="Verterinarian"> <br><br>
-		<input class="span5" type="text" name="vetTel" placeholder="Vet Phone Number"><br><br>
+		<input class="span5" type="text" name="fName" placeholder="First Name" id="firstName"> <br><br>
+		<input class="span5" type="text" name="lName" placeholder="Last Name" id="lastName"><br><br>
+		<input class="span5" type="text" name="street" placeholder="Street" id ="street"><br><br>
+		<input class="span5" type="text" name="city" placeholder="City" id="city"> <br><br>
+		<input class="span5" type="text" name="state" placeholder="State" id="state"> <br><br>
+		<input class="span5" type="text" name="zip" placeholder="Zip Code" id="zip"> <br><br>
+		<input class="span5" type="text" name="email" placeholder="Email" id="email">  <br><br>
+		<input class="span5" type="text" name="homeTel" placeholder="Home Phone" id="homeTel"> <br><br>
+		<input class="span5" type="text" name="emrgTel" placeholder="Emergency Number" id="emrgTel"><br><br>
+		<input class="span5" type="text" name="vetName" placeholder="Verterinarian" id="vetName"> <br><br>
+		<input class="span5" type="text" name="vetTel" placeholder="Vet Phone Number" id="vetTel"><br><br>
 			
 		<h3>Dog Information:</h3><br>
 		
-			<input class="span5" type="text" name="dogName" placeholder="DogName"><br><br> 
-			<input class="span5" type="text" name="breed" placeholder="Breed"> <br><br>
-			<input class="span5" type="text" name="size" placeholder="Size"> <br><br>
-			<input type="text" name="food" placeholder="Food"><br><br>
+			<input class="span5" type="text" name="dogName" placeholder="DogName" id="dogName"><br><br> 
+			<input class="span5" type="text" name="breed" placeholder="Breed" id="breed"> <br><br>
+			<input class="span5" type="text" name="size" placeholder="Size" id="size"> <br><br>
+			<input type="text" name="food" placeholder="Food" id="food"><br><br>
 			
 			
 		<h3>Date:</h3><br>
 		
-			<input type="text" name="dropOff" placeholder="Drop-Off Date: YYYY-MM-DD"> <br><br>
-			<input type="text" name="pickUp" placeholder="Pick-Up Date: YYYY-MM-DD"> <br><br>
+			<input type="text" name="dropOff" placeholder="Drop-Off Date: YYYY-MM-DD" id="dropOff"> <br><br>
+			<input type="text" name="pickUp" placeholder="Pick-Up Date: YYYY-MM-DD" id="pickUp"> <br><br>
 	
 			<input class="btn btn-primary" type="submit" value="Reserve">
 			</form>
@@ -167,7 +167,7 @@ $(window).load(function() {
 <div class="menu_bot">
     <ul id="menu_bot" class="clearfix">
      <li><a class="active" href="index.html">Home</a></li>				
-				<li><a class= "active" href="pricing.html">Pricing</a></li>
+				<li><a class= "active" href="pricing.html">About</a></li>
 				<li><a class= "active" href="customerProfile.html">Reservation</a></li>	
 				<li><a class= "active" href="loginform.html">Administration</a></li>         
     </ul>
@@ -194,7 +194,7 @@ function validateForm() {
     }
     
    
-   var b = document.getElementById("lastname").value;
+   var b = document.getElementById("lastName").value;
     if (!b) {
         alert("Last name must be filled out");
         return false;
