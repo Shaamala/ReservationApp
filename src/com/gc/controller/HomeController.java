@@ -61,7 +61,9 @@ public class HomeController {
 		 boolean result = loginService.authenticateUser(userId, password);
 		 User user = loginService.getUserByUserId(userId);
 		 if(result == true){
+
 			 return new ModelAndView("redirect:/Admin","user", user);
+
 			
 		 }
 		 
@@ -100,7 +102,7 @@ public class HomeController {
 	
 	
 
-	@RequestMapping("/Admin")
+	@RequestMapping("Admin")
 	public ModelAndView emailStats(Model model) {
 		MailjetClient client;
 		MailjetRequest request;
@@ -136,6 +138,7 @@ public class HomeController {
 	
 
 		return new ModelAndView("Admin", "emailStats", clickedCount + deliveredCount + openedCount + spamComplaint + blockedCount );
+
 }
 
 	@RequestMapping("/pricing")
@@ -154,12 +157,6 @@ public class HomeController {
 		return new ModelAndView("customerProfile", "message", message);
 	}
 
-	@RequestMapping("/reserve")
-	public ModelAndView reservation() {
-
-		String message = "<br><div style='text-align:center;'>" + "<h3>Beekel Farms Kennel</h3>";
-		return new ModelAndView("reserve", "message", message);
-	}
 
 
 	// Create Customer profile
@@ -208,9 +205,7 @@ public class HomeController {
 		String msg = "Profile created.";
 		MailjetResponse response = sendEmail(email, fName, dogName, dropOff, pickUp);
 
-
-		
-		return new ModelAndView("index", "MSG", msg + response);
+		return new ModelAndView("index", "MSG", msg);
 
 
 	}
