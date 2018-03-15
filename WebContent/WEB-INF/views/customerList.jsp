@@ -75,7 +75,18 @@ $(window).load(function() {
 	//
 
 }); //
-</script>		
+</script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  
+  <script>
+  $(document).ready(function() {
+    $("#datepicker").datepicker();
+    $("#datepicker2").datepicker();
+    $("#datepicker3").datepicker();
+  });
+  </script>			
 </head>
 
 <body>
@@ -120,7 +131,7 @@ $(window).load(function() {
 <br>
 <br>
 <form action="searchbydate">
-<input type="text" name="dropOff">
+<input type="text" id="datepicker" name="dropOff">
 <input class="btn btn-primary" type="submit" value="Search date">
 
 </form><br>
@@ -186,7 +197,7 @@ ${addCustomer}
 
 		<td>Veterinarian:<br> <input type="text" name="vetName"></td>
 
-		<td>Drop off Date:<br> <input type="text" name="dropOff" ></td>
+		<td>Drop off Date:<br> <input type="text" name="dropOff" id="datepicker2" ></td>
 		</tr>
     <tr>
 		<td>Last Name:<br> <input type="text" name="lName" required></td>
@@ -194,7 +205,7 @@ ${addCustomer}
 
 		<td>Home Phone:<br> <input type="text" name="homeTel"></td>
 		<td>Vet Phone Number:<br> <input type="text" name="vetTel"></td>
-		<td>Pick up Date: <br><input type="text" name="pickUp" ></td>
+		<td>Pick up Date: <br><input type="text" name="pickUp" id="datepicker3" ></td>
 	</tr>
    	<tr>
 			<td>Street: <br><input type="text" name="street" ></td>
