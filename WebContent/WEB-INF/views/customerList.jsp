@@ -183,12 +183,27 @@ ${addCustomer}
 		<td>First Name:<br> <input type="text" name="fName" required></td>
 		<td>City:<br> <input type="text" name="city" ></td>
 		<td>Email Address:<br><input type="text" name="email"></td>
+<<<<<<< HEAD
+		<td>Veterinarian :<br> <input type="text" name="vetName"></td>
+=======
 		<td>Veterinarian:<br> <input type="text" name="vetName"></td>
+>>>>>>> fc0362113015f5cab22c8819089e8df885d5ef9a
 		<td>Drop off Date:<br> <input type="text" name="dropOff" ></td>
 		</tr>
     <tr>
 		<td>Last Name:<br> <input type="text" name="lName" required></td>
 		<td>State:<br> <input type="text" name="state" ></td>
+<<<<<<< HEAD
+		<td>Home Phone:<br> <input type="text" name="homeTel"></td>
+		<td>Vet Phone Number:<br> <input type="text" name="vetTel"></td>
+		<td>Pick up Date: <br><input type="text" name="pickUp" ></td>
+	</tr>
+   	<tr>
+			<td>Street: <br><input type="text" name="street" ></td>
+			<td>ZipCode:<br> <input type="text" name="zip"></td>
+			<td>Emergency Number:<br> <input type="text" name="emrgTel"></td>
+			<td>Dog Name: <br><input type="text" name="dogName" ></td>
+=======
 		<td>Home Phone:<br><input type="text" name="homeTel"></td>
 		<td>Vet Phone Number:<br><input type="text" name="vetTel"></td>
 		<td>Pick up Date:<br><input type="text" name="pickUp" ></td>
@@ -198,6 +213,7 @@ ${addCustomer}
 			<td>ZipCode:<br><input type="text" name="zip"></td>
 			<td>Emergency Number:<br><input type="text" name="emrgTel"></td>
 			<td>Dog Name:<br><input type="text" name="dogName" ></td>
+>>>>>>> fc0362113015f5cab22c8819089e8df885d5ef9a
 			<td><input class="btn btn-primary" type="submit" value="Add"></td>
 	</tr>
 </table>
