@@ -1,91 +1,189 @@
-b<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>DogCation - Profile</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Your description">
+<meta name="keywords" content="Your keywords">
+<meta name="author" content="Your name">
+<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+
+<link rel="stylesheet" href="resources\\css\\bootstrap.css" type="text/css" media="screen">
+<link rel="stylesheet" href="resources\\css\\bootstrap-responsive.css" type="text/css" media="screen">    
+<link rel="stylesheet" href="resources\\css\\style.css" type="text/css" media="screen">
+<link rel="stylesheet" href="resources\\css\\camera.css" type="text/css" media="screen">
 <style>
-.form {
-	border-radius: 5px;
-	background-color: #f2f2f2;
-	padding: 20px;
-}
+img.logo{
 
-input[type=text], select, textarea {
-	width: 100%;
-	padding: 12px;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	resize: vertical;
+display: block;
+    margin-left: auto;
+    margin-right: auto;
+   width: 150px;
+    
 }
+div.pictext{
+	vertical-align: text-top;
 
-input[type=submit] {
-	background-color: #4CAF50;
-	color: white;
-	padding: 12px 20px;
-	border: none;
-	border-radius: 4px;
-	cursor: pointer;
-	float: ;eft;
 }
 </style>
-</head>
-<body>
-<div style="text-align:center">
-		<h1>
-			Make a customer Profile<br> <br>
-		</h1>
 
-<h3>
-			<a href="index.html">Home</a>
-			<a href="pricing.html">Pricing</a>
-			<a href="customerProfile.html">Make Profile</a>
-			<a href="reserve.html">Reserve</a>
-		</h3>
-		</div>
-		
-	<div class="form"">
-		<h3>Create profile and make reservation</h3>
-		<form name="myForm" onsubmit="return validateForm()" action="addProfile" method="post">
-			<h3>Customer Information:</h3><br>
-				First Name: <input type="text" id="firstName" name="fName"> 
-				Last Name: <input type="text" id="lastName" name="lName"> 
-				Street: <input type="text" id="street" name="street">
-				City: <input type="text" id="city" name="city">
-				State: <input type="text" id="state" name="state"> 
-				Zip Code: <input type="text" id="zip" name="zip">
-				Email: <input type="text" id="email" name="email">  
-				Home Phone: <input type="text" id="homeTel" name="homeTel"> 
-				Emergency Number: <input type="text" id="emrgTel" name="emrgTel"> 
-				Veterinarian : <input type="text" id="vetName" name="vetName"> 
-				Vet Phone Number: <input type="text" id="vetTel" name="vetTel"> <br>
-			
-			<h3>Dog Information:</h3><br>
-			
-				Dog Name: <input type="text" id="dogName" name="dogName"> 
-				Breed: <input type="text" id="breed" name="breed"> 
-				Size: <input type="text" id="size" name="size"> 
-				Food: <input type="text" id="food" name="food"><br>
-				
-			
-			<h3>Date:</h3><br>
-		
-				Drop-Off Date: <input type="text" id="dropOff" name="dropOff"> 
-				Pick-Up Date: <input type="text" id="pickUp" name="pickUp"> <br>
-			<br>
-			<input type="submit" value="Reserve">
-		</form>		
-			
-			
-			
-			<br>
-			
+<script type="text/javascript" src="resources\\js\\jquery.js"></script>  
+<script type="text/javascript" src="resources\\js\\jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="resources\\js\\superfish.js"></script>
+
+<script type="text/javascript" src="resources\\js\\jquery.ui.totop.js"></script>
+
+<script type="text/javascript" src="resources\\js\\camera.js"></script>
+<script type="text/javascript" src="resources\\js\\jquery.mobile.customized.min.js"></script>
+<script>
+$(document).ready(function() {
+	/////// icons
+	$(".social li").find("a").css({opacity:0.3});
+	$(".social li a").hover(function() {
+		$(this).stop().animate({opacity:1 }, 400, 'easeOutExpo');		    
+	},function(){
+	    $(this).stop().animate({opacity:0.3 }, 400, 'easeOutExpo' );		   
+	}); 
+
+	// camera
+	$('#camera_wrap').camera({
+		//thumbnails: true
+		autoAdvance			: false,		
+		mobileAutoAdvance	: false,
+		height: '52%',
+		hover: false,
+		loader: 'none',
+		navigation: true,
+		navigationHover: false,
+		mobileNavHover: false,
+		playPause: false,
+		pauseOnClick: false,
+		pagination			: false,
+		time: 7000,
+		transPeriod: 1000,
+		minHeight: '200px'
+	});
+
+}); //
+$(window).load(function() {
+	//
+
+}); //
+</script>		
+</head>
+
+<body>
+<div id="main">
+
+<div class="container">
+<div class="row">
+<div class="span12">
+<div class="top1">
+<div class="social_wrapper">
 	
 </div>
+</div>
+<header>
+<a><img class= "logo" src="https://image.ibb.co/jwweKc/dogcation.png" alt="dogcation" border="0"></a>
+	
+</header>
+<div class="navbar navbar_">
+	<div class="navbar-inner navbar-inner_">
+		<a class="btn btn-navbar btn-navbar_" data-toggle="collapse" data-target=".nav-collapse_">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</a>
+		<div class="nav-collapse nav-collapse_ collapse">
+			<ul class="nav sf-menu clearfix">
+				<li><a class="active" href="index.html">Home</a></li>				
+				<li><a class= "active" href="pricing.html">About</a></li>
+				<li><a class= "active" href="customerProfile.html">Reservation</a></li>	
+				<li><a class= "active" href="loginform.html">Administration</a></li>											
+															
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="hl1"></div>	
+</div>	
+</div>	
+</div>
+</div>
+<h1>Create profile and make reservation</h1>
+		
+	<div class="form">
 
-${MSG}
 
+
+		<form name="myForm" onsubmit="return validateForm()" class="form-horizontal" action="addProfile" method="post">
+		<h3>Customer Information:</h3><br>
+		
+		<input class="span5" type="text" name="fName" placeholder="First Name"> <br><br>
+		<input class="span5" type="text" name="lName" placeholder="Last Name"><br><br>
+		<input class="span5" type="text" name="street" placeholder="Street"><br><br>
+		<input class="span5" type="text" name="city" placeholder="City"> <br><br>
+		<input class="span5" type="text" name="state" placeholder="State"> <br><br>
+		<input class="span5" type="text" name="zip" placeholder="Zip Code"> <br><br>
+		<input class="span5" type="text" name="email" placeholder="Email">  <br><br>
+		<input class="span5" type="text" name="homeTel" placeholder="Home Phone"> <br><br>
+		<input class="span5" type="text" name="emrgTel" placeholder="Emergency Number"><br><br>
+		<input class="span5" type="text" name="vetName" placeholder="Verterinarian"> <br><br>
+		<input class="span5" type="text" name="vetTel" placeholder="Vet Phone Number"><br><br>
+			
+		<h3>Dog Information:</h3><br>
+		
+			<input class="span5" type="text" name="dogName" placeholder="DogName"><br><br> 
+			<input class="span5" type="text" name="breed" placeholder="Breed"> <br><br>
+			<input class="span5" type="text" name="size" placeholder="Size"> <br><br>
+			<input type="text" name="food" placeholder="Food"><br><br>
+			
+			
+		<h3>Date:</h3><br>
+		
+			<input type="text" name="dropOff" placeholder="Drop-Off Date: YYYY-MM-DD"> <br><br>
+			<input type="text" name="pickUp" placeholder="Pick-Up Date: YYYY-MM-DD"> <br><br>
+	
+			<input class="btn btn-primary" type="submit" value="Reserve">
+			</form>
+			
+
+<div class="container">
+<div class="row">
+<div class="span12">
+<div class="hl2"></div>	
+
+</div>	
+</div>	
+</div>
+
+<footer>
+<div class="container">
+<div class="row">
+<div class="span12">
+<div class="bot1">
+<div class="menu_bot">
+    <ul id="menu_bot" class="clearfix">
+     <li><a class="active" href="index.html">Home</a></li>				
+				<li><a class= "active" href="pricing.html">Pricing</a></li>
+				<li><a class= "active" href="customerProfile.html">Reservation</a></li>	
+				<li><a class= "active" href="loginform.html">Administration</a></li>         
+    </ul>
+</div>
+</div>	
+<div class="bot2">
+<div class="copyright">Copyright © 2013. All rights reserved.</div>
+</div>
+</div>
+</div>		
+</div>
+</footer>
+	
+</div>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<!-- Input Validation  -->
 <script>
 function validateForm() {
     
@@ -193,8 +291,7 @@ function validateForm() {
         return false;
     }
 }
-
 </script>
-	
+
 </body>
 </html>
