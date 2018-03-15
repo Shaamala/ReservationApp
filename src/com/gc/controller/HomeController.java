@@ -61,32 +61,18 @@ public class HomeController {
 		 boolean result = loginService.authenticateUser(userId, password);
 		 User user = loginService.getUserByUserId(userId);
 		 if(result == true){
-			 //request.getSession().setAttribute("user", user);		
-			 //model.addAttribute();
 			 return new ModelAndView("/Admin","user", user);
-			 //response.sendRedirect("/Admin");
+			
 		 }
-		 //else{
+		 
 			 return new ModelAndView("/error");
-			 //response.sendRedirect();
-//		 }
-//	
-//		String message = "<br><div style='text-align:center;'>" + "<h3>Login</h3>";
-//		return new ModelAndView("index", "HttpServletRequest request, HttpServletResponse response", message);
 	}
-
 	
-	@RequestMapping("/sendEmail")
-	public ModelAndView sendEmail(@RequestParam("email") String email, @RequestParam("fName") String fName) {
-
+	private MailjetResponse sendEmail(String email, String fName, String dogName, String dropOff, String pickUp) {
 		MailjetRequest email1;
 		MailjetResponse response = null;
 
-		// Note how we set the version to v3.1 using ClientOptions
-		// MailjetClient client = new
-		// MailjetClient(System.getenv("737eb42ade92225b46e471d3d091fa80"),
-		// System.getenv("3ffa02400a98cb6aeaf190ede5f50b5e"), new
-		// ClientOptions("v3.1"));
+	
 		MailjetClient client = new MailjetClient(System.getProperty("PublicKey"), System.getProperty("PrivateKey"),
 				new ClientOptions("v3.1"));
 
@@ -95,10 +81,9 @@ public class HomeController {
 				new JSONObject().put(Emailv31.Message.EMAIL, "malarbw@umich.edu").put(Emailv31.Message.NAME,
 						"Administrator"))
 				.put(Emailv31.Message.SUBJECT, "RESERVATION CONFRIMATION")
-				.put(Emailv31.Message.TEXTPART, "Dear " + fName + ", thanks for reserving with our kennel.")
-				// .put(Emailv31.Message.HTMLPART,
-				// "<h3>Dear passenger, welcome to Mailjet</h3><br/>May the delivery force be
-				// with you!")
+				.put(Emailv31.Message.TEXTPART, "Dear " + fName + ", thanks for reserving with our kennel." + " Your dog " + dogName + " will be staying with us from " 
+						+ dropOff + " to " + pickUp )
+				
 				.put(Emailv31.Message.TO, new JSONArray().put(new JSONObject().put(Emailv31.Message.EMAIL, email)));
 
 		email1 = new MailjetRequest(Emailv31.resource).property(Emailv31.MESSAGES, (new JSONArray()).put(message));
@@ -109,27 +94,46 @@ public class HomeController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		return new ModelAndView("sendEmail", "response", response.getStatus());
+		return response;
 	}
-	
-	@RequestMapping("")
-	public ModelAndView emailStats() {
-		  MailjetClient client;
-	      MailjetRequest request;
-	      MailjetResponse response = null;
-	      client = new MailjetClient(System.getProperty("PublicKey"), System.getProperty("PrivateKey"));
-	      request = new MailjetRequest(Messagestatistics.resource);
-	      try {
+
+	@RequestMapping("/Admin")
+	public ModelAndView emailStats(Model model) {
+		MailjetClient client;
+		MailjetRequest request;
+		MailjetResponse response = null;
+		String stats = "";
+		client = new MailjetClient(System.getProperty("PublicKey"), System.getProperty("PrivateKey"));
+		request = new MailjetRequest(Messagestatistics.resource);
+		try {
 			response = client.get(request);
 		} catch (MailjetException | MailjetSocketTimeoutException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	      System.out.println(response.getStatus());
-	      System.out.println(response.getData());
-		return new ModelAndView ("","","");
-	}
+
+		JSONArray arr = (response.getData());
+
+		
+		JSONObject json = arr.getJSONObject(0);
+		String clickedCount = json.get("ClickedCount").toString();
+		clickedCount = "<h6>Clicked Count: " + clickedCount + "</h6>";
+		
+		String deliveredCount = json.get("DeliveredCount").toString();
+		deliveredCount = "<h6>Delivered Count: " + deliveredCount + "</h6>";
+		
+		String openedCount = json.get("OpenedCount").toString();
+		openedCount = "<h6>Opened Count: " + openedCount + "</h6>";
+		
+		String spamComplaint = json.get("SpamComplaintCount").toString();
+		spamComplaint = "<h6>Spam Complaint Count: " + spamComplaint + "</h6>";
+		
+		String blockedCount = json.get("BlockedCount").toString();
+		blockedCount = "<h6>Blocked Count: " + blockedCount + "</h6>";
+		
+		
+		return new ModelAndView("Admin", "emailStats", clickedCount + deliveredCount + openedCount + spamComplaint + blockedCount);
+}
 
 	@RequestMapping("/pricing")
 	public ModelAndView helloWorld() {
@@ -200,6 +204,8 @@ public class HomeController {
 		testD.addDogs(dog);
 		String msg = "Profile created.";
 
+		MailjetResponse response = sendEmail(email, fName, dogName, dropOff, pickUp);
+		
 		return new ModelAndView("reserve", "MSG", msg);
 
 	}
