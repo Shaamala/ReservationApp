@@ -13,7 +13,7 @@ import javax.persistence.Table;
  */
 
 @Entity // marks the class as a hibernate entity (mapped class)
-@Table(name = "Customers") // maps the class to the DB table 
+@Table(name = "customers") // maps the class to the DB table 
 public class Customers implements Serializable{
 	
 	private int customerID;

@@ -61,7 +61,7 @@ public class HomeController {
 		 boolean result = loginService.authenticateUser(userId, password);
 		 User user = loginService.getUserByUserId(userId);
 		 if(result == true){
-			 return new ModelAndView("/Admin","user", user);
+			 return new ModelAndView("redirect:/Admin","user", user);
 			
 		 }
 		 
@@ -101,12 +101,11 @@ public class HomeController {
 	
 
 	@RequestMapping("/Admin")
-
 	public ModelAndView emailStats(Model model) {
 		MailjetClient client;
 		MailjetRequest request;
 		MailjetResponse response = null;
-		String stats = "";
+		
 		client = new MailjetClient(System.getProperty("PublicKey"), System.getProperty("PrivateKey"));
 		request = new MailjetRequest(Messagestatistics.resource);
 		try {
@@ -134,10 +133,9 @@ public class HomeController {
 		
 		String blockedCount = json.get("BlockedCount").toString();
 		blockedCount = "<h6>Blocked Count: " + blockedCount + "</h6>";
-		
-		
+	
 
-		return new ModelAndView("Admin", "emailStats", clickedCount + deliveredCount + openedCount + spamComplaint + blockedCount);
+		return new ModelAndView("Admin", "emailStats", clickedCount + deliveredCount + openedCount + spamComplaint + blockedCount );
 }
 
 	@RequestMapping("/pricing")
@@ -212,7 +210,7 @@ public class HomeController {
 
 
 		
-		return new ModelAndView("index", "MSG", msg);
+		return new ModelAndView("index", "MSG", msg + response);
 
 
 	}
