@@ -71,7 +71,17 @@ $(window).load(function() {
 	//
 
 }); //
-</script>		
+</script>	
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  
+  <script>
+  $(document).ready(function() {
+    $("#datepicker").datepicker();
+    $("#datepicker2").datepicker();
+  });
+  </script>	
 </head>
 
 <body>
@@ -143,13 +153,16 @@ $(window).load(function() {
 			
 		<h3>Date:</h3><br>
 		
-			<input type="text" name="dropOff" placeholder="Drop-Off Date: YYYY-MM-DD" id="dropOff"> <br><br>
-			<input type="text" name="pickUp" placeholder="Pick-Up Date: YYYY-MM-DD" id="pickUp"> <br><br>
+			<input type="text" name="dropOff" id="datepicker"> <br><br>
+			<input type="text" name="pickUp" id="datepicker2" > <br><br>
 	
+			<!--  <input name="date" id="datepicker" />-->
 			<input class="btn btn-primary" type="submit" value="Reserve">
 			</form>
 			
-
+			<form>
+    
+</form>
 <div class="container">
 <div class="row">
 <div class="span12">
