@@ -76,7 +76,7 @@ public class HomeController {
 	}
 
 	
-	@RequestMapping("/sendEmail")
+	/*@RequestMapping("/sendEmail")
 	public ModelAndView sendEmail(@RequestParam("email") String email, @RequestParam("fName") String fName) {
 
 		MailjetRequest email1;
@@ -111,24 +111,72 @@ public class HomeController {
 		}
 
 		return new ModelAndView("sendEmail", "response", response.getStatus());
+	}*/
+	private MailjetResponse sendEmail(String email, String fName, String dogName, String dropOff, String pickUp) {
+		MailjetRequest email1;
+		MailjetResponse response = null;
+
+	
+		MailjetClient client = new MailjetClient(System.getProperty("PublicKey"), System.getProperty("PrivateKey"),
+				new ClientOptions("v3.1"));
+
+		JSONObject message = new JSONObject();
+		message.put(Emailv31.Message.FROM,
+				new JSONObject().put(Emailv31.Message.EMAIL, "malarbw@umich.edu").put(Emailv31.Message.NAME,
+						"Administrator"))
+				.put(Emailv31.Message.SUBJECT, "RESERVATION CONFRIMATION")
+				.put(Emailv31.Message.TEXTPART, "Dear " + fName + ", thanks for reserving with our kennel." + " Your dog " + dogName + " will be staying with us from " 
+						+ dropOff + " to " + pickUp )
+				
+				.put(Emailv31.Message.TO, new JSONArray().put(new JSONObject().put(Emailv31.Message.EMAIL, email)));
+
+		email1 = new MailjetRequest(Emailv31.resource).property(Emailv31.MESSAGES, (new JSONArray()).put(message));
+			System.out.println("HELLLLo");
+		try {
+			response = client.post(email1);
+		} catch (MailjetException | MailjetSocketTimeoutException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return response;
 	}
 	
-	@RequestMapping("")
-	public ModelAndView emailStats() {
-		  MailjetClient client;
-	      MailjetRequest request;
-	      MailjetResponse response = null;
-	      client = new MailjetClient(System.getProperty("PublicKey"), System.getProperty("PrivateKey"));
-	      request = new MailjetRequest(Messagestatistics.resource);
-	      try {
+	@RequestMapping("/reserve")
+	public ModelAndView emailStats(Model model) {
+		MailjetClient client;
+		MailjetRequest request;
+		MailjetResponse response = null;
+		String stats = "";
+		client = new MailjetClient(System.getProperty("PublicKey"), System.getProperty("PrivateKey"));
+		request = new MailjetRequest(Messagestatistics.resource);
+		try {
 			response = client.get(request);
 		} catch (MailjetException | MailjetSocketTimeoutException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	      System.out.println(response.getStatus());
-	      System.out.println(response.getData());
-		return new ModelAndView ("","","");
+
+		JSONArray arr = (response.getData());
+
+		
+		JSONObject json = arr.getJSONObject(0);
+		String clickedCount = json.get("ClickedCount").toString();
+		clickedCount = "<h6>Clicked Count: " + clickedCount + "</h6>";
+		
+		String deliveredCount = json.get("DeliveredCount").toString();
+		deliveredCount = "<h6>Delivered Count: " + deliveredCount + "</h6>";
+		
+		String openedCount = json.get("OpenedCount").toString();
+		openedCount = "<h6>Opened Count: " + openedCount + "</h6>";
+		
+		String spamComplaint = json.get("SpamComplaintCount").toString();
+		spamComplaint = "<h6>Spam Complaint Count: " + spamComplaint + "</h6>";
+		
+		String blockedCount = json.get("BlockedCount").toString();
+		blockedCount = "<h6>Blocked Count: " + blockedCount + "</h6>";
+		
+		
+		return new ModelAndView("reserve", "emailStats", clickedCount + deliveredCount + openedCount + spamComplaint + blockedCount);
 	}
 
 	@RequestMapping("/pricing")
@@ -199,8 +247,9 @@ public class HomeController {
 		DogsDaoImp testD = new DogsDaoImp();
 		testD.addDogs(dog);
 		String msg = "Profile created.";
+		MailjetResponse response = sendEmail(email, fName, dogName, dropOff, pickUp);
 
-		return new ModelAndView("reserve", "MSG", msg);
+		return new ModelAndView("reserve", "MSG", msg + response);
 
 	}
 
