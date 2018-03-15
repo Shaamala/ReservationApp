@@ -61,7 +61,7 @@ public class HomeController {
 		 boolean result = loginService.authenticateUser(userId, password);
 		 User user = loginService.getUserByUserId(userId);
 		 if(result == true){
-			 return new ModelAndView("/Admin","user", user);
+			 return new ModelAndView("redirect:/Admin","user", "");
 			
 		 }
 		 
@@ -97,7 +97,7 @@ public class HomeController {
 		return response;
 	}
 
-	@RequestMapping("/Admin")
+	@RequestMapping("Admin")
 	public ModelAndView emailStats(Model model) {
 		MailjetClient client;
 		MailjetRequest request;
@@ -117,22 +117,30 @@ public class HomeController {
 		
 		JSONObject json = arr.getJSONObject(0);
 		String clickedCount = json.get("ClickedCount").toString();
-		clickedCount = "<h6>Clicked Count: " + clickedCount + "</h6>";
+		//clickedCount = "<h6>Clicked Count: " + clickedCount + "</h6>";
 		
 		String deliveredCount = json.get("DeliveredCount").toString();
-		deliveredCount = "<h6>Delivered Count: " + deliveredCount + "</h6>";
+		//deliveredCount = "<h6>Delivered Count: " + deliveredCount + "</h6>";
 		
 		String openedCount = json.get("OpenedCount").toString();
-		openedCount = "<h6>Opened Count: " + openedCount + "</h6>";
+		//openedCount = "<h6>Opened Count: " + openedCount + "</h6>";
 		
 		String spamComplaint = json.get("SpamComplaintCount").toString();
-		spamComplaint = "<h6>Spam Complaint Count: " + spamComplaint + "</h6>";
+		//spamComplaint = "<h6>Spam Complaint Count: " + spamComplaint + "</h6>";
 		
 		String blockedCount = json.get("BlockedCount").toString();
-		blockedCount = "<h6>Blocked Count: " + blockedCount + "</h6>";
+		//blockedCount = "<h6>Blocked Count: " + blockedCount + "</h6>";
+		System.out.println(clickedCount);
+		model.addAttribute("clickedCount", clickedCount);
+		model.addAttribute("deliveredCount", deliveredCount);
+		model.addAttribute("openedCount", openedCount);
+		model.addAttribute("blockedCount", blockedCount);
+		model.addAttribute("spamComplaint", spamComplaint);
+		
+		String test = "test";
 		
 		
-		return new ModelAndView("Admin", "emailStats", clickedCount + deliveredCount + openedCount + spamComplaint + blockedCount);
+		return new ModelAndView("Admin", "emailStats", test);
 }
 
 	@RequestMapping("/pricing")
@@ -151,12 +159,6 @@ public class HomeController {
 		return new ModelAndView("customerProfile", "message", message);
 	}
 
-	@RequestMapping("/reserve")
-	public ModelAndView reservation() {
-
-		String message = "<br><div style='text-align:center;'>" + "<h3>Beekel Farms Kennel</h3>";
-		return new ModelAndView("reserve", "message", message);
-	}
 
 
 	// Create Customer profile
@@ -206,7 +208,7 @@ public class HomeController {
 
 		MailjetResponse response = sendEmail(email, fName, dogName, dropOff, pickUp);
 		
-		return new ModelAndView("reserve", "MSG", msg);
+		return new ModelAndView("index", "MSG", msg);
 
 	}
 
